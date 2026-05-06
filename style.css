@@ -222,7 +222,7 @@ header {
 ────────────────────────────────────────── */
 .hero {
   background: linear-gradient(135deg, #0047CC 0%, #0064FF 50%, #338BFF 100%);
-  padding: 48px 24px 56px;
+  padding: 48px 24px 0;
   text-align: center;
   color: #fff;
   position: relative;
@@ -235,6 +235,7 @@ header {
   position: absolute;
   inset: 0;
   background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
 }
 
 .hero h1 {
@@ -258,6 +259,8 @@ header {
   margin: 32px auto 0;
   padding: 0 24px;
   display: flex;
+  position: relative;
+  z-index: 1;
 }
 
 .tab-btn {
@@ -270,6 +273,7 @@ header {
   padding: 12px 32px;
   border-radius: var(--radius) var(--radius) 0 0;
   cursor: pointer;
+  text-decoration: none;
   transition: all 0.2s;
   display: flex;
   align-items: center;
@@ -297,6 +301,32 @@ header {
   opacity: 1;
 }
 
+body:has(#tab-pda:target) .tab-btn[data-tab="pos"],
+body:has(#tab-pos:target) .tab-btn[data-tab="pda"] {
+  background: rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+body:has(#tab-pda:target) .tab-btn[data-tab="pos"] .tab-dot,
+body:has(#tab-pos:target) .tab-btn[data-tab="pda"] .tab-dot {
+  opacity: 0.6;
+}
+
+body:has(#tab-pda:target) .tab-btn[data-tab="pda"],
+body:has(#tab-pos:target) .tab-btn[data-tab="pos"] {
+  background: var(--surface);
+  color: var(--text-primary);
+}
+
+body:has(#tab-pda:target) .tab-btn[data-tab="pda"] {
+  color: var(--pda-color);
+}
+
+body:has(#tab-pda:target) .tab-btn[data-tab="pda"] .tab-dot,
+body:has(#tab-pos:target) .tab-btn[data-tab="pos"] .tab-dot {
+  opacity: 1;
+}
+
 
 /* ──────────────────────────────────────────
    5. 본문 레이아웃
@@ -315,61 +345,21 @@ header {
   display: block;
 }
 
+body:has(#tab-pda:target) #tab-pos {
+  display: none;
+}
+
+body:has(#tab-pda:target) #tab-pda,
+body:has(#tab-pos:target) #tab-pos {
+  display: block;
+}
+
+body:has(#tab-pos:target) #tab-pda {
+  display: none;
+}
 
 /* ──────────────────────────────────────────
-   6. 빠른 바로가기
-────────────────────────────────────────── */
-.quick-nav {
-  background: var(--surface);
-  border-radius: 0 var(--radius) var(--radius) var(--radius);
-  box-shadow: var(--shadow-md);
-  padding: 28px 28px 20px;
-  margin-bottom: 32px;
-}
-
-.quick-nav-title {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  margin-bottom: 16px;
-}
-
-.quick-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.chip {
-  background: var(--bg);
-  border: 1.5px solid var(--border);
-  border-radius: 100px;
-  padding: 7px 16px;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.15s;
-  color: var(--text-primary);
-  font-family: inherit;
-}
-
-.chip:hover {
-  border-color: var(--primary);
-  color: var(--primary);
-  background: var(--primary-light);
-}
-
-.chip.pda-chip:hover {
-  border-color: var(--pda-color);
-  color: var(--pda-color);
-  background: var(--pda-light);
-}
-
-
-/* ──────────────────────────────────────────
-   7. 섹션 제목
+   6. 섹션 제목
 ────────────────────────────────────────── */
 .section-title {
   font-size: 20px;
@@ -379,6 +369,10 @@ header {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.basic-section-title {
+  padding-top: 0.5cm;
 }
 
 .badge {
@@ -395,7 +389,7 @@ header {
 
 
 /* ──────────────────────────────────────────
-   8. 기능 카드 그리드
+   7. 기능 카드 그리드
 ────────────────────────────────────────── */
 .card-grid {
   display: grid;
@@ -583,6 +577,62 @@ header {
   background: var(--border);
 }
 
+.manual-video-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 14px 16px;
+  margin: -8px 0 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: border-color 0.15s, background 0.15s, transform 0.15s;
+}
+
+.manual-video-link:hover {
+  border-color: var(--primary);
+  background: var(--primary-light);
+  transform: translateY(-1px);
+}
+
+.pda-detail .manual-video-link:hover {
+  border-color: var(--pda-color);
+  background: var(--pda-light);
+}
+
+.manual-video-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.pda-detail .manual-video-icon {
+  background: var(--pda-color);
+}
+
+.manual-video-link strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.manual-video-link small {
+  display: block;
+  margin-top: 2px;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
 /* 단계별 가이드 */
 .steps {
   display: flex;
@@ -758,96 +808,6 @@ header {
   display: block;
 }
 
-
-/* ──────────────────────────────────────────
-   11. 영상 섹션
-────────────────────────────────────────── */
-.video-section {
-  border-radius: var(--radius);
-  padding: 28px;
-  margin-bottom: 32px;
-  color: #fff;
-}
-
-/* POS 영상 - 어두운 네이비 */
-.video-pos {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-}
-
-/* PDA 영상 - 어두운 녹색 */
-.video-pda {
-  background: linear-gradient(135deg, #0a2a1a 0%, #0d3520 100%);
-}
-
-.video-section-title {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-
-.video-section-sub {
-  font-size: 13px;
-  opacity: 0.6;
-  margin-bottom: 20px;
-}
-
-.video-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 12px;
-}
-
-.video-card {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: var(--radius-sm);
-  padding: 16px;
-  cursor: pointer;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.video-card:hover {
-  background: rgba(255, 255, 255, 0.14);
-  transform: translateY(-2px);
-}
-
-.video-thumb {
-  width: 40px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  flex-shrink: 0;
-}
-
-.video-title {
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 1.4;
-}
-
-.video-dur {
-  font-size: 11px;
-  opacity: 0.5;
-  margin-top: 2px;
-}
-
-.video-badge {
-  font-size: 10px;
-  background: rgba(255, 255, 255, 0.15);
-  padding: 2px 6px;
-  border-radius: 4px;
-  margin-top: 4px;
-  display: inline-block;
-}
-
-
 /* ──────────────────────────────────────────
    12. QR 모달
 ────────────────────────────────────────── */
@@ -973,16 +933,12 @@ header {
   .logo-text { display: none; }
 
   .main-wrap  { padding: 0 16px 40px; }
-  .hero       { padding: 32px 16px 40px; }
+  .hero       { padding: 32px 16px 0; }
   .tab-btn    { padding: 10px 20px; font-size: 15px; }
   .tab-bar    { padding: 0 16px; }
-  .quick-nav  { padding: 20px; }
 
   /* 모바일: 카드 1열 */
   .card-grid  { grid-template-columns: 1fr; }
-
-  /* 모바일: 영상 2열 */
-  .video-grid { grid-template-columns: 1fr 1fr; }
 
   .detail-panel { padding: 20px; }
 }

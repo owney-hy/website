@@ -23,6 +23,8 @@
      error    : { title, cases[] } — 즉시 연락 박스 (선택)
      faq      : [{ q, a }]
 ────────────────────────────────────────────────────────── */
+const VIDEO_MANUAL_URL = 'pos pda manual/';
+
 const CONTENT = {
 
   /* ── POS ──────────────────────────────────────── */
@@ -44,6 +46,25 @@ const CONTENT = {
         a: '전원 버튼을 3초간 길게 누르면 켜집니다. 절전 모드인 경우 화면을 한 번 터치하면 활성화됩니다.' },
       { q: '로그인 화면이 나오지 않으면?',
         a: '단말기를 재시작하세요. 화면 상단의 재시작 버튼을 누르거나, 전원을 껐다가 다시 켜세요.' },
+    ],
+  },
+
+  'pos-preset': {
+    tab: 'pos',
+    icon: '⚙️',
+    title: 'PRESET 설정',
+    subtitle: '자주 쓰는 상품과 결제 옵션을 빠르게 불러오는 설정',
+    steps: [
+      { text: '메인 화면에서 <strong>[설정]</strong> 또는 <strong>[PRESET]</strong> 메뉴로 이동합니다.' },
+      { text: '<strong>[신규 등록]</strong>을 누르고 자주 사용하는 상품, 금액, 할인 또는 결제 옵션을 선택합니다.' },
+      { text: '직원이 알아보기 쉬운 이름을 입력합니다. 예: 점심 세트, 기본 할인, 단체 결제.' },
+      { text: '<strong>[저장]</strong>을 누른 뒤 메인 화면으로 돌아와 PRESET 버튼이 정상 표시되는지 확인합니다.' },
+      { text: '잘못 등록한 항목은 PRESET 목록에서 선택 후 <strong>[수정]</strong> 또는 <strong>[삭제]</strong>로 정리합니다.' },
+    ],
+    notice: 'PRESET 변경은 매장 전체 사용 화면에 반영될 수 있습니다. 운영 중에는 관리자 확인 후 변경하세요.',
+    faq: [
+      { q: 'PRESET 버튼이 보이지 않으면?',
+        a: '권한이 없는 계정일 수 있습니다. 관리자 계정으로 로그인하거나 권한 설정을 확인하세요.' },
     ],
   },
 
@@ -229,7 +250,7 @@ const CONTENT = {
     steps: [
       { text: 'PDA 기기의 <strong>전원 버튼을 1~2초</strong> 눌러 켭니다.' },
       { text: '화면에 <strong>로그인 창</strong>이 뜨면 담당자 아이디와 비밀번호를 입력합니다.' },
-      { text: '로그인 완료 후 메인 메뉴가 나타납니다. 상품조회, 재고, 매출 등의 메뉴가 있습니다.' },
+      { text: '로그인 완료 후 메인 메뉴가 나타납니다. 결제, 취소, 영수증, 정산, PRESET 메뉴가 있습니다.' },
       { text: '화면이 꺼지는 것을 방지하려면 설정에서 <strong>화면 꺼짐 시간을 늘려두는 것</strong>을 권장합니다.' },
     ],
     faq: [
@@ -238,69 +259,164 @@ const CONTENT = {
     ],
   },
 
-  'pda-product': {
+  'pda-preset': {
     tab: 'pda',
-    icon: '🔍',
-    title: '상품 조회',
-    subtitle: '바코드 스캔 및 상품 정보 검색',
+    icon: '⚙️',
+    title: 'PRESET 설정',
+    subtitle: 'PDA에서 자주 쓰는 작업을 빠르게 실행하는 설정',
     steps: [
-      { text: '메인 메뉴에서 <strong>[상품조회]</strong>를 선택합니다.' },
-      { text: 'PDA 측면의 <strong>스캔 버튼을 눌러</strong> 상품 바코드를 스캔합니다. 또는 검색창에 상품명·바코드를 직접 입력합니다.' },
-      { text: '상품 정보(이름, 가격, 재고수량, 위치)가 화면에 표시됩니다.' },
-      { text: '여러 상품을 연속 조회하려면 스캔 버튼을 계속 누르거나 검색창을 초기화 후 재입력합니다.' },
+      { text: 'PDA 메인 화면에서 <strong>[설정]</strong> 또는 <strong>[PRESET]</strong> 메뉴를 선택합니다.' },
+      { text: '<strong>[신규 등록]</strong>을 눌러 자주 사용하는 상품, 조회 조건, 결제 옵션을 선택합니다.' },
+      { text: '직원이 구분하기 쉬운 이름을 입력합니다. 예: 자주 판매, 재고 확인, 빠른 결제.' },
+      { text: '<strong>[저장]</strong> 후 메인 화면에서 PRESET 버튼이 보이는지 확인합니다.' },
+      { text: '필요 없는 항목은 PRESET 목록에서 선택 후 <strong>[수정]</strong> 또는 <strong>[삭제]</strong>합니다.' },
     ],
+    notice: 'PDA PRESET은 단말기 또는 계정 권한에 따라 표시 항목이 다를 수 있습니다.',
     faq: [
-      { q: '바코드가 잘 스캔이 안 될 때?',
-        a: '바코드 표면이 구겨지거나 빛 반사가 심하면 스캔이 어렵습니다. 각도를 바꿔보거나 바코드 번호를 수동 입력하세요.' },
+      { q: 'PRESET 저장이 안 되면?',
+        a: '네트워크 연결 상태를 확인한 뒤 다시 저장하세요. 계속 실패하면 관리자에게 권한 확인을 요청하세요.' },
     ],
   },
 
-  'pda-stock': {
+  'pda-card': {
     tab: 'pda',
-    icon: '📦',
-    title: '재고 확인',
-    subtitle: '현재 재고 수량 조회 방법',
+    icon: '💳',
+    title: '카드 결제',
+    subtitle: 'PDA 단말기에서 카드 결제 처리',
     steps: [
-      { text: '메인 메뉴에서 <strong>[재고관리]</strong>를 선택합니다.' },
-      { text: '상품 바코드를 스캔하거나 상품명으로 검색합니다.' },
-      { text: '상품의 <strong>현재 재고 수량, 위치, 최근 입고일</strong> 등이 표시됩니다.' },
-      { text: '재고가 0인 경우 화면에 "재고 없음"으로 표시됩니다.' },
+      { text: '메인 화면에서 <strong>[결제]</strong> 버튼을 누릅니다.' },
+      { text: '상품을 바코드 스캔하거나 금액을 직접 입력합니다.' },
+      { text: '결제 수단에서 <strong>[카드]</strong>를 선택합니다.' },
+      { text: '고객에게 카드를 PDA 리더기에 삽입하거나 갖다 대도록 안내합니다.' },
+      { text: '승인 완료 메시지를 확인한 뒤 영수증 출력 또는 전송 여부를 선택합니다.' },
     ],
+    notice: '카드 인식이 안 되면 IC칩 방향과 리더기 접촉 상태를 확인한 뒤 다시 시도하세요.',
     faq: [
-      { q: 'PDA 재고와 실제 재고가 다를 때?',
-        a: '입고·출고 처리가 누락된 경우입니다. 관리자에게 재고 조정을 요청하세요.' },
+      { q: '모바일 간편결제도 가능한가요?',
+        a: 'NFC 또는 간편결제 기능이 활성화된 단말기라면 카드 결제와 같은 흐름으로 처리할 수 있습니다.' },
     ],
   },
 
-  'pda-sales': {
+  'pda-cash': {
     tab: 'pda',
-    icon: '📈',
-    title: '매출 조회',
-    subtitle: '일별·기간별 매출 데이터 확인',
+    icon: '💵',
+    title: '현금 결제',
+    subtitle: 'PDA 단말기에서 현금 결제와 현금영수증 처리',
     steps: [
-      { text: '메인 메뉴에서 <strong>[매출조회]</strong>를 선택합니다.' },
-      { text: '조회할 기간을 설정합니다. 오늘·이번 주·이번 달 또는 직접 날짜를 지정할 수 있습니다.' },
-      { text: '<strong>[조회]</strong>를 누르면 총 매출, 건수, 카드·현금 비율 등이 표시됩니다.' },
-      { text: '특정 상품의 매출을 보려면 상품 바코드를 스캔하거나 검색합니다.' },
+      { text: '메인 화면에서 <strong>[결제]</strong> 버튼을 누릅니다.' },
+      { text: '상품을 스캔하거나 결제 금액을 입력합니다.' },
+      { text: '결제 수단에서 <strong>[현금]</strong>을 선택합니다.' },
+      { text: '받은 금액을 입력하고 화면에 표시되는 거스름돈을 확인합니다.' },
+      { text: '현금영수증 발급 여부를 선택한 뒤 결제를 완료합니다.' },
     ],
     faq: [
-      { q: '오늘 매출이 반영되어 있지 않으면?',
-        a: '매출 데이터는 실시간 또는 일정 시간마다 동기화됩니다. 잠시 기다린 후 다시 조회하거나 화면을 새로고침하세요.' },
+      { q: '현금영수증 정보를 잘못 입력했으면?',
+        a: '당일 내 현금영수증 메뉴에서 취소 후 재발급하세요. 권한이 없으면 관리자에게 요청하세요.' },
     ],
   },
 
-  'pda-order': {
+  'pda-complex': {
     tab: 'pda',
-    icon: '📋',
-    title: '주문 조회',
-    subtitle: '주문 내역 및 상태 확인 방법',
+    icon: '🔀',
+    title: '복합 결제',
+    subtitle: '카드와 현금 등 여러 결제 수단을 함께 처리',
     steps: [
-      { text: '메인 메뉴에서 <strong>[주문조회]</strong>를 선택합니다.' },
-      { text: '조회 기간 또는 주문번호를 입력합니다.' },
-      { text: '주문 목록이 표시됩니다. 각 주문을 눌러 상세 내역을 확인합니다.' },
-      { text: '주문 상태(접수 / 처리중 / 완료 / 취소)를 확인할 수 있습니다.' },
+      { text: '결제 화면에서 결제 수단을 <strong>[복합결제]</strong>로 선택합니다.' },
+      { text: '먼저 처리할 결제 수단과 금액을 입력합니다.' },
+      { text: '첫 결제가 승인되면 남은 금액이 자동으로 표시됩니다.' },
+      { text: '남은 금액을 카드 또는 현금으로 추가 결제합니다.' },
+      { text: '전체 결제 금액이 맞는지 확인한 뒤 영수증을 출력하거나 전송합니다.' },
     ],
+    notice: '복합 결제 중 일부 결제가 실패하면 완료된 결제 내역을 확인한 뒤 취소 또는 재시도하세요.',
     faq: [],
+  },
+
+  'pda-cancel': {
+    tab: 'pda',
+    icon: '❌',
+    title: '결제 취소 (당일)',
+    subtitle: 'PDA에서 오늘 결제한 건을 전액 취소',
+    steps: [
+      { text: '메인 화면에서 <strong>[취소]</strong> 또는 <strong>[결제취소]</strong> 메뉴를 선택합니다.' },
+      { text: '영수증 번호, 결제 시간, 금액으로 취소할 결제 건을 조회합니다.' },
+      { text: '해당 결제 건을 선택하고 <strong>[취소]</strong>를 누릅니다.' },
+      { text: '카드 결제 취소는 결제 시 사용한 동일 카드를 PDA에 삽입하거나 갖다 대도록 안내합니다.' },
+      { text: '취소 완료 메시지와 취소 영수증을 확인합니다.' },
+    ],
+    notice: '카드 결제 취소는 반드시 결제에 사용한 동일 카드로 처리해야 합니다.',
+    faq: [
+      { q: '취소 내역이 조회되지 않으면?',
+        a: '조회 날짜와 결제 시간을 다시 확인하세요. 전날 이전 결제 건은 반품 메뉴를 사용합니다.' },
+    ],
+  },
+
+  'pda-partial': {
+    tab: 'pda',
+    icon: '✂️',
+    title: '부분 취소',
+    subtitle: 'PDA에서 결제 금액 일부만 취소',
+    steps: [
+      { text: '메인 화면에서 <strong>[취소]</strong> 메뉴로 이동합니다.' },
+      { text: '취소할 결제 건을 조회한 뒤 선택합니다.' },
+      { text: '<strong>[부분취소]</strong>를 선택하고 취소할 금액을 입력합니다.' },
+      { text: '카드 취소인 경우 동일 카드를 PDA에 삽입하거나 갖다 대도록 안내합니다.' },
+      { text: '부분취소 완료 후 남은 결제 금액을 고객에게 안내합니다.' },
+    ],
+    notice: '일부 카드사 또는 결제 방식은 부분 취소가 제한될 수 있습니다.',
+    faq: [],
+  },
+
+  'pda-refund': {
+    tab: 'pda',
+    icon: '🔄',
+    title: '반품 처리',
+    subtitle: '전날 또는 이전 날짜 결제 건 반품',
+    steps: [
+      { text: '메인 화면에서 <strong>[반품]</strong> 메뉴를 선택합니다.' },
+      { text: '영수증 번호 또는 날짜와 금액으로 반품할 결제 건을 조회합니다.' },
+      { text: '해당 결제 건을 선택하고 <strong>[반품 진행]</strong>을 누릅니다.' },
+      { text: '결제 수단에 따라 카드 또는 현금으로 환불 처리합니다.' },
+      { text: '반품 완료 메시지와 반품 영수증을 확인합니다.' },
+    ],
+    notice: '카드 반품은 카드사 정책에 따라 환불 반영까지 시간이 걸릴 수 있습니다.',
+    faq: [],
+  },
+
+  'pda-receipt': {
+    tab: 'pda',
+    icon: '🖨️',
+    title: '영수증 재출력',
+    subtitle: 'PDA에서 이미 발행된 영수증을 다시 출력',
+    steps: [
+      { text: '메인 화면에서 <strong>[조회]</strong> 또는 <strong>[영수증]</strong> 메뉴로 이동합니다.' },
+      { text: '영수증 번호, 결제 시간, 금액 중 하나로 결제 건을 검색합니다.' },
+      { text: '해당 결제 건을 선택하고 <strong>[영수증 재출력]</strong>을 누릅니다.' },
+      { text: '연결된 프린터 또는 전자영수증 전송 방식을 선택합니다.' },
+      { text: '출력 또는 전송 완료 여부를 확인합니다.' },
+    ],
+    faq: [
+      { q: '프린터가 연결되지 않으면?',
+        a: '블루투스 또는 네트워크 프린터 연결 상태를 확인한 뒤 다시 출력하세요.' },
+    ],
+  },
+
+  'pda-settle': {
+    tab: 'pda',
+    icon: '📊',
+    title: '마감 정산',
+    subtitle: 'PDA에서 일별 매출 마감 및 정산',
+    steps: [
+      { text: '영업 종료 후 메인 화면에서 <strong>[정산]</strong> 메뉴를 선택합니다.' },
+      { text: '오늘 날짜와 매장 정보를 확인한 뒤 <strong>[정산 시작]</strong>을 누릅니다.' },
+      { text: '카드, 현금, 취소 합계 등 정산 내역을 확인합니다.' },
+      { text: '내용이 맞으면 <strong>[정산 확정]</strong>을 누릅니다.' },
+      { text: '정산 영수증을 출력하거나 관리자에게 전송합니다.' },
+    ],
+    notice: '정산 확정 후에는 당일 데이터를 수정하기 어렵습니다. 금액을 반드시 확인하세요.',
+    faq: [
+      { q: '정산 메뉴가 비활성화되어 있으면?',
+        a: '정산 권한이 없는 계정일 수 있습니다. 관리자 계정으로 로그인하거나 권한을 확인하세요.' },
+    ],
   },
 
   'pda-error': {
@@ -310,7 +426,7 @@ const CONTENT = {
     subtitle: '오류 발생 시 빠른 해결 방법',
     steps: [
       { text: '<strong>화면 멈춤</strong>: 전원 버튼을 8~10초간 길게 눌러 강제 재시작합니다.' },
-      { text: '<strong>스캔이 안 될 때</strong>: 앱을 닫고 다시 열거나 PDA를 재시작합니다. 스캔 창을 다시 활성화해보세요.' },
+      { text: '<strong>결제 또는 스캔이 안 될 때</strong>: 앱을 닫고 다시 열거나 PDA를 재시작합니다. 결제 화면을 다시 활성화해보세요.' },
       { text: '<strong>Wi-Fi 끊김</strong>: 설정 → Wi-Fi 에서 자동 연결 네트워크를 확인하고 다시 연결합니다.' },
       { text: '<strong>앱이 실행 안 될 때</strong>: 앱을 종료하고 다시 실행합니다. 반복되면 재시작 후 시도합니다.' },
     ],
@@ -344,34 +460,68 @@ const SEARCH_DATA = Object.entries(CONTENT).map(([id, d]) => ({
    3. 탭 전환
 ────────────────────────────────────────────────────────── */
 
+/** 현재 열린 패널 ID 추적 */
+let currentOpenId = null;
+
+function getTabFromHash() {
+  const tab = window.location.hash.replace('#', '');
+  if (tab === 'pda' || tab === 'tab-pda') return 'pda';
+  if (tab === 'pos' || tab === 'tab-pos') return 'pos';
+  return null;
+}
+
 /**
  * @param {'pos'|'pda'} tab - 전환할 탭 ID
  * @param {HTMLElement}  btn - 클릭된 탭 버튼 요소
  */
-function switchTab(tab, btn) {
+function switchTab(tab, btn, updateHash = true) {
+  const targetPanel = document.getElementById('tab-' + tab);
+  const targetBtn = btn || document.querySelector(`.tab-btn[data-tab="${tab}"]`);
+  if (!targetPanel || !targetBtn) return;
+
   // 탭 패널 / 버튼 비활성화
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
 
   // 선택한 탭 활성화
-  document.getElementById('tab-' + tab).classList.add('active');
-  btn.classList.add('active');
+  targetPanel.classList.add('active');
+  targetBtn.classList.add('active');
+
+  const targetHash = '#tab-' + tab;
+  if (updateHash && window.location.hash !== targetHash) {
+    history.pushState(null, '', targetHash);
+  }
 
   // 열려 있던 상세 패널 초기화
   document.querySelectorAll('.detail-panel').forEach(p => p.remove());
   currentOpenId = null;
 }
 
+document.querySelectorAll('.tab-btn[data-tab]').forEach(btn => {
+  btn.addEventListener('click', event => {
+    event.preventDefault();
+    switchTab(btn.dataset.tab, btn);
+  });
+});
+
+function syncTabFromHash() {
+  const tab = getTabFromHash();
+  if (tab) switchTab(tab, undefined, false);
+}
+
+window.addEventListener('hashchange', syncTabFromHash);
+window.addEventListener('popstate', syncTabFromHash);
+
+const initialTab = getTabFromHash();
+if (initialTab) switchTab(initialTab, undefined, false);
+
 
 /* ──────────────────────────────────────────────────────────
    4. 상세 패널 열기 / 닫기
 ────────────────────────────────────────────────────────── */
 
-/** 현재 열린 패널 ID 추적 */
-let currentOpenId = null;
-
 /**
- * 기능 카드 클릭 시 상세 패널을 빠른 바로가기 아래에 삽입합니다.
+ * 기능 카드 클릭 시 상세 패널을 탭 상단에 삽입합니다.
  * 같은 ID를 다시 클릭하면 패널이 닫힙니다.
  * @param {string} id - CONTENT 객체의 키
  */
@@ -441,9 +591,18 @@ function openDetail(id) {
       </div>
     </div>` : '';
 
+  const manualLinkHTML = `
+    <a class="manual-video-link" href="${data.videoUrl || VIDEO_MANUAL_URL}" target="_blank" rel="noopener">
+      <span class="manual-video-icon">▶</span>
+      <span>
+        <strong>동영상 매뉴얼 보기</strong>
+        <small>새 창에서 확인</small>
+      </span>
+    </a>`;
+
   /* ── 패널 DOM 생성 ──────────────────────────── */
   const panel = document.createElement('div');
-  panel.className = 'detail-panel open';
+  panel.className = `detail-panel open ${isPDA ? 'pda-detail' : ''}`;
   panel.innerHTML = `
     <div class="detail-header">
       <div class="detail-icon" style="background:${iconBg}">${data.icon}</div>
@@ -453,6 +612,7 @@ function openDetail(id) {
       </div>
       <button class="close-btn" onclick="closeDetail('${id}')">✕</button>
     </div>
+    ${manualLinkHTML}
     <div class="steps">${stepsHTML}</div>
     ${noticeHTML}
     ${errorHTML}
@@ -537,9 +697,7 @@ function goToResult(id, tab) {
   searchInput.value = '';
 
   // 탭 버튼 찾기
-  const tabBtn = document.querySelector(
-    tab === 'pda' ? '.tab-btn.pda-tab' : '.tab-btn:not(.pda-tab)'
-  );
+  const tabBtn = document.querySelector(`.tab-btn[data-tab="${tab}"]`);
   switchTab(tab, tabBtn);
 
   // DOM 전환 후 패널 오픈 (약간의 지연)
