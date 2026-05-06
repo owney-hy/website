@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POS·PDA 사용법 안내</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ───────────────────────────────────────
+       헤더 : 로고 / 검색창 / QR버튼
+  ─────────────────────────────────────────── -->
+  <header>
+    <div class="header-inner">
+
+      <!-- 로고 -->
+      <div class="logo">
+        <span class="logo-badge">매뉴얼</span>
+        <span class="logo-text">POS·PDA 사용법 안내</span>
+      </div>
+
+      <!-- 검색창 -->
+      <div class="search-wrap">
+        <svg class="search-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="기능 검색 (예: 취소, 영수증, 매출조회)"
+          autocomplete="off"
+        >
+        <div class="search-results" id="searchResults"></div>
+      </div>
+
+      <!-- QR코드 버튼 -->
+      <button class="qr-btn" onclick="openQRModal()">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <rect x="3" y="3" width="7" height="7"/>
+          <rect x="14" y="3" width="7" height="7"/>
+          <rect x="3" y="14" width="7" height="7"/>
+          <path d="M14 14h3v3h-3zM17 17h3v3h-3zM14 17h.01M17 14h.01"/>
+        </svg>
+        QR코드
+      </button>
+
+    </div>
+  </header>
+
+
+  <!-- ───────────────────────────────────────
+       히어로 + 탭 바
+  ─────────────────────────────────────────── -->
+  <div class="hero">
+    <h1>POS·PDA 사용법 안내</h1>
+    <p>결제 단말기 사용 중 막히는 부분을 빠르게 확인하세요.<br>단계별로 쉽게 안내해 드립니다.</p>
+
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab('pos', this)">
+        <div class="tab-dot"></div>
+        🖥️ POS 단말기
+      </button>
+      <button class="tab-btn pda-tab" onclick="switchTab('pda', this)">
+        <div class="tab-dot"></div>
+        📱 PDA 단말기
+      </button>
+    </div>
+  </div>
+
+
+  <!-- ───────────────────────────────────────
+       본문 (탭 패널)
+  ─────────────────────────────────────────── -->
+  <div class="main-wrap">
+
+    <!-- ===================== POS 탭 ===================== -->
+    <div id="tab-pos" class="tab-panel active">
+
+      <!-- 빠른 바로가기 -->
+      <div class="quick-nav">
+        <div class="quick-nav-title">빠른 바로가기</div>
+        <div class="quick-chips">
+          <button class="chip" onclick="openDetail('pos-login')">로그인</button>
+          <button class="chip" onclick="openDetail('pos-card')">카드 결제</button>
+          <button class="chip" onclick="openDetail('pos-cash')">현금 결제</button>
+          <button class="chip" onclick="openDetail('pos-cancel')">결제 취소</button>
+          <button class="chip" onclick="openDetail('pos-receipt')">영수증 재출력</button>
+          <button class="chip" onclick="openDetail('pos-settle')">정산</button>
+          <button class="chip" onclick="openDetail('pos-error')">장애 대응</button>
+          <button class="chip" onclick="openDetail('pos-partial')">부분 취소</button>
+        </div>
+      </div>
+
+      <!-- 상세 패널 삽입 위치 (JS가 동적으로 채움) -->
+      <div id="detail-container-pos"></div>
+
+      <!-- 기본 사용법 -->
+      <div class="section-title">🖥️ 기본 사용법 <span class="badge">POS</span></div>
+      <div class="card-grid">
+        <div class="func-card" onclick="openDetail('pos-login')">
+          <div class="card-inner">
+            <div class="card-icon">🔑</div>
+            <div class="card-content">
+              <div class="card-title">로그인 및 초기 화면</div>
+              <div class="card-desc">POS 시작 방법과 메인 화면 구성 안내</div>
+            </div>
+            <svg class="card-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+        </div>
+        <div class="func-card" onclick="openDetail('pos-card')">
+          <div class="card-inner">
+            <div class="card-icon">💳</div>
+            <div class="card-content">
+              <div class="card-title">카드 결제</div>
+              <div class="card-desc">신용카드·체크카드 결제 방법</div>
+            </div>
+            <svg class="card-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+        </div>
+        <div class="func-card" onclick="openDetail('pos-cash')">
+          <div class="card-inner">
+            <div class="card-icon">💵</div>
+            <div class="card-content">
+              <div class="card-title">현금 결제</div>
+              <div class="card-desc">현금 결제 및 현금영수증 처리 방법</div>
+            </div>
+            <svg class="card-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+        </div>
+        <div class="func-card" onclick="openDetail('pos-complex')">
+          <div class="card-inner">
+            <div class="card-icon">🔀</div>
+            <div class="card-content">
+              <div class="card-title">복합 결제</div>
+              <div class="card-desc">카드 + 현금 등 혼합 결제 방법</div>
+            </div>
+            <svg class="card-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- 취소·반품 -->
+      <div class="section-title">↩️ 취소·반품 <span class="badge">POS</span></div>
+      <div class="card-grid">
+        <div class="func-card" onclick="openDetail('pos-cancel')">
+          <div class="card-inner">
+            <div class="card-icon">❌</div>
+            <div class="card-content">
+              <div class="card-title">결제 취소 (당일)</div>
+              <div class="card-desc">당일 결제 건 전액 취소 방법</div>
+            </div>
+            <svg class="card-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+        </div>
+        <div class="func-card" onclick="openDetail('pos-partial')">
+          <div class="card-inner">
+            <div class="card-icon">✂️</div>
+            <div class="card-content">
+              <div class="card-title">부분 취소</div>
+              <div class="card-desc">결제 금액 일부만 취소하는 방법</div>
+            </div>
+            <svg class="card-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+        </div>
+        <div class="func-card" onclick="openDetail('pos-refund')">
+          <div class="card-inner">
+            <div class="card-icon">🔄</div>
+            <div class="card-content">
+              <div class="card-title">반품 처리</div>
+              <div class="card-desc">전날 또는 이전 결제 건 반품 방법</div>
+            </div>
+            <svg class="card-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- 영수증·정산 -->
+      <div class="section-title">🧾 영수증·정산 <span class="badge">POS</span></div>
+      <div class="card-grid">
+        <div class="func-card" onclick="openDetail('pos-receipt')">
+          <div class="card-inner">
+            <div class="card-icon">🖨️</div>
+            <div class="card-content">
+              <div class="card-title">영수증 재출력</div>
+              <div class="card-desc">이미 발행된 영수증을 다시 출력하는 방법</div>
+            </div>
+            <svg class="card-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+        </div>
+        <div class="func-card" onclick="openDetail('pos-settle')">
+          <div class="card-inner">
+            <div class="card-icon">📊</div>
+            <div class="card-content">
+              <div class="card-title">마감 정산</div>
+              <div class="card-desc">일별 매출 마감 및 정산 방법</div>
+            </div>
+            <svg class="card-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- POS 영상 -->
+      <div class="video-section video-pos">
+        <div class="video-section-title">📹 POS 사용법 영상</div>
+        <div class="video-section-sub">짧은 영상으로 더 쉽게 따라하세요</div>
+        <div class="video-grid">
+          <div class="video-card" onclick="alert('영상 링크를 여기에 연결하세요.')">
+            <div class="video-thumb">💳</div>
+            <div class="video-info">
+              <div class="video-title">카드 결제 방법</div>
+              <div class="video-dur">약 1분</div>
+              <span class="video-badge">가장 많이 봄</span>
+            </div>
+          </div>
+          <div class="video-card" onclick="alert('영상 링크를 여기에 연결하세요.')">
+            <div class="video-thumb">❌</div>
+            <div class="video-info">
+              <div class="video-title">결제 취소 방법</div>
+              <div class="video-dur">약 45초</div>
+            </div>
+          </div>
+          <div class="video-card" onclick="alert('영상 링크를 여기에 연결하세요.')">
+            <div class="video-thumb">🖨️</div>
+            <div class="video-info">
+              <div class="video-title">영수증 재출력</div>
+              <div class="video-dur">약 30초</div>
+            </div>
+          </div>
+          <div class="video-card" onclick="alert('영상 링크를 여기에 연결하세요.')">
+            <div class="video-thumb">📊</div>
+            <div class="video-info">
+              <div class="video-title">마감 정산 방법</div>
+              <div class="video-dur">약 1분</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 장애 대응 -->
+      <div class="section-title">🚨 장애 대응 <span class="badge badge-error">오류</span></div>
+      <div class="card-grid">
+        <div class="func-card" onclick="openDetail('pos-error')">
+          <div class="card-inner">
+            <div class="card-icon card-icon-error">⚠️</div>
+            <div class="card-content">
+              <div class="card-title">단말기 오류 대응</div>
+              <div class="card-desc">연결 오류, 프린터 오류, 화면 멈춤 대응</div>
+            </div>
+            <svg class="card-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /tab-pos -->
+
+
+    <!-- ===================== PDA 탭 ===================== -->
+    <div id="tab-pda" class="tab-panel">
+
+      <!-- 빠른 바로가기 -->
+      <div class="quick-nav">
+        <div class="quick-nav-title">빠른 바로가기</div>
+        <div class="quick-chips">
+          <button class="chip pda-chip" onclick="openDetail('pda-login')">PDA 로그인</button>
+          <button class="chip pda-chip" onclick="openDetail('pda-product')">상품 조회</button>
+          <button class="chip pda-chip" onclick="openDetail('pda-stock')">재고 확인</button>
+          <button class="chip pda-chip" onclick="openDetail('pda-sales')">매출 조회</button>
+          <button class="chip pda-chip" onclick="openDetail('pda-order')">주문 조회</button>
+          <button class="chip pda-chip" onclick="openDetail('pda-error')">오류 대응</button>
+        </div>
+      </div>
+
+      <!-- 상세 패널 삽입 위치 -->
+      <div id="detail-container-pda"></div>
+
+      <!-- 기본 사용법 -->
+      <div class="section-title">📱 기본 사용법 <span class="badge badge-pda">PDA</span></div>
+      <div class="card-grid">
+        <div class="func-card pda-card" onclick="openDetail('pda-login')">
+          <div class="card-inner">
+            <div class="card-icon">🔑</div>
+            <div class="card-content">
+              <div class="card-title">PDA 로그인 및 메인 화면</div>
+              <div class="card-desc">PDA 시작 방법과 기본 화면 구성 안내</div>
+            </div>
+            <svg class="card-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+        </div>
+        <div class="func-card pda-card" onclick="openDetail('pda-product')">
+          <div class="card-inner">
+            <div class="card-icon">🔍</div>
+            <div class="card-content">
+              <div class="card-title">상품 조회</div>
+              <div class="card-desc">바코드 스캔 및 상품 정보 검색 방법</div>
+            </div>
+            <svg class="card-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+        </div>
+        <div class="func-card pda-card" onclick="openDetail('pda-stock')">
+          <div class="card-inner">
+            <div class="card-icon">📦</div>
+            <div class="card-content">
+              <div class="card-title">재고 확인</div>
+              <div class="card-desc">현재 재고 수량 조회 방법</div>
+            </div>
+            <svg class="card-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+        </div>
+        <div class="func-card pda-card" onclick="openDetail('pda-order')">
+          <div class="card-inner">
+            <div class="card-icon">📋</div>
+            <div class="card-content">
+              <div class="card-title">주문 조회</div>
+              <div class="card-desc">주문 내역 및 상태 확인 방법</div>
+            </div>
+            <svg class="card-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- 매출 조회 -->
+      <div class="section-title">📈 매출 조회 <span class="badge badge-pda">PDA</span></div>
+      <div class="card-grid">
+        <div class="func-card pda-card" onclick="openDetail('pda-sales')">
+          <div class="card-inner">
+            <div class="card-icon">📈</div>
+            <div class="card-content">
+              <div class="card-title">매출 조회</div>
+              <div class="card-desc">일별·기간별 매출 데이터 확인 방법</div>
+            </div>
+            <svg class="card-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- PDA 영상 -->
+      <div class="video-section video-pda">
+        <div class="video-section-title">📹 PDA 사용법 영상</div>
+        <div class="video-section-sub">짧은 영상으로 더 쉽게 따라하세요</div>
+        <div class="video-grid">
+          <div class="video-card" onclick="alert('영상 링크를 여기에 연결하세요.')">
+            <div class="video-thumb">🔍</div>
+            <div class="video-info">
+              <div class="video-title">상품 조회 방법</div>
+              <div class="video-dur">약 45초</div>
+              <span class="video-badge">가장 많이 봄</span>
+            </div>
+          </div>
+          <div class="video-card" onclick="alert('영상 링크를 여기에 연결하세요.')">
+            <div class="video-thumb">📦</div>
+            <div class="video-info">
+              <div class="video-title">재고 확인 방법</div>
+              <div class="video-dur">약 30초</div>
+            </div>
+          </div>
+          <div class="video-card" onclick="alert('영상 링크를 여기에 연결하세요.')">
+            <div class="video-thumb">📈</div>
+            <div class="video-info">
+              <div class="video-title">매출 조회 방법</div>
+              <div class="video-dur">약 1분</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 장애 대응 -->
+      <div class="section-title">🚨 장애 대응 <span class="badge badge-error">오류</span></div>
+      <div class="card-grid">
+        <div class="func-card pda-card" onclick="openDetail('pda-error')">
+          <div class="card-inner">
+            <div class="card-icon card-icon-error">⚠️</div>
+            <div class="card-content">
+              <div class="card-title">PDA 오류 대응</div>
+              <div class="card-desc">연결 오류, 스캔 불가, 화면 멈춤 대응</div>
+            </div>
+            <svg class="card-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /tab-pda -->
+
+  </div><!-- /main-wrap -->
+
+
+  <!-- ───────────────────────────────────────
+       QR 모달
+  ─────────────────────────────────────────── -->
+  <div class="modal-overlay" id="qrModal" onclick="if(event.target===this) closeQRModal()">
+    <div class="modal">
+      <h3>📲 QR코드로 바로 접속</h3>
+      <p>POS/PDA 단말기 주변에 부착하면<br>직원들이 바로 스캔할 수 있어요.</p>
+      <div class="qr-img-wrap">
+        <div class="qr-grid">
+          <div class="qr-item">
+            <div class="qr-item-label qr-pos">🖥️ POS 매뉴얼</div>
+            <div class="qr-placeholder">
+              <!-- 실제 QR 이미지 교체: <img src="qr-pos.png" style="width:100%;border-radius:4px"> -->
+              🔲
+            </div>
+          </div>
+          <div class="qr-item">
+            <div class="qr-item-label qr-pda">📱 PDA 매뉴얼</div>
+            <div class="qr-placeholder">
+              <!-- 실제 QR 이미지 교체: <img src="qr-pda.png" style="width:100%;border-radius:4px"> -->
+              🔲
+            </div>
+          </div>
+        </div>
+        <div class="qr-note">
+          QR 이미지는 배포 전 실제 URL로 생성해 교체하세요.<br>
+          qr.io 또는 qrcode-monkey.com 에서 무료 생성 가능
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeQRModal()">닫기</button>
+    </div>
+  </div>
+
+
+  <!-- JS는 body 맨 아래에 로드 (DOM 완성 후 실행) -->
+  <script src="script.js"></script>
+</body>
+</html>
