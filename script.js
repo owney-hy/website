@@ -273,7 +273,7 @@ const CONTENT = {
     icon: '🔑',
     title: 'PDA 로그인 및 메인 화면',
     subtitle: 'PDA 기기를 처음 시작할 때',
-    videoUrl: 'https://www.youtube.com/watch?v=h9NXl8o-4HU',
+    videoUrl: 'https://www.youtube.com/embed/h9NXl8o-4HU?si=UcEuxH7M02abROSA',
     steps: [
       { text: 'PDA 기기의 <strong>전원 버튼을 1~2초</strong> 눌러 켭니다.' },
       { text: '화면에 <strong>로그인 창</strong>이 뜨면 담당자 아이디와 비밀번호를 입력합니다.' },
