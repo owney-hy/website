@@ -1,5 +1,5 @@
 /* ============================================================
-   style.css  —  POS·PDA 사용법 안내 사이트
+   style.css  —  POS·PDA 사용 매뉴얼 사이트
    구성: 변수 → 리셋 → 레이아웃 → 컴포넌트 → 반응형
    ============================================================ */
 
@@ -54,6 +54,14 @@ body {
   min-height: 100vh;
 }
 
+.tab-state {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 
 /* ──────────────────────────────────────────
    3. 헤더
@@ -86,15 +94,6 @@ header {
   font-size: 18px;
   font-weight: 800;
   color: var(--text-primary);
-}
-
-.logo-badge {
-  background: var(--primary);
-  color: #fff;
-  border-radius: 6px;
-  padding: 2px 8px;
-  font-size: 13px;
-  font-weight: 700;
 }
 
 .logo-text {
@@ -227,6 +226,7 @@ header {
   color: #fff;
   position: relative;
   overflow: hidden;
+  isolation: isolate;
 }
 
 /* 히어로 배경 패턴 */
@@ -234,6 +234,7 @@ header {
   content: '';
   position: absolute;
   inset: 0;
+  z-index: 0;
   background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
   pointer-events: none;
 }
@@ -244,6 +245,7 @@ header {
   line-height: 1.25;
   margin-bottom: 12px;
   position: relative;
+  z-index: 1;
 }
 
 .hero p {
@@ -251,6 +253,7 @@ header {
   opacity: 0.85;
   line-height: 1.6;
   position: relative;
+  z-index: 1;
 }
 
 /* 탭 바 */
@@ -260,13 +263,14 @@ header {
   padding: 0 24px;
   display: flex;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .tab-btn {
   background: rgba(255, 255, 255, 0.18);
   border: none;
   color: rgba(255, 255, 255, 0.7);
+  appearance: none;
   font-family: inherit;
   font-size: 16px;
   font-weight: 700;
@@ -278,6 +282,11 @@ header {
   display: flex;
   align-items: center;
   gap: 8px;
+  position: relative;
+  z-index: 3;
+  pointer-events: auto;
+  user-select: none;
+  touch-action: manipulation;
 }
 
 .tab-btn.active {
@@ -301,32 +310,31 @@ header {
   opacity: 1;
 }
 
-body:has(#tab-pda:target) .tab-btn[data-tab="pos"],
-body:has(#tab-pos:target) .tab-btn[data-tab="pda"] {
-  background: rgba(255, 255, 255, 0.18);
-  color: rgba(255, 255, 255, 0.7);
-}
-
-body:has(#tab-pda:target) .tab-btn[data-tab="pos"] .tab-dot,
-body:has(#tab-pos:target) .tab-btn[data-tab="pda"] .tab-dot {
-  opacity: 0.6;
-}
-
-body:has(#tab-pda:target) .tab-btn[data-tab="pda"],
-body:has(#tab-pos:target) .tab-btn[data-tab="pos"] {
+#tab-state-pda:checked ~ .hero .tab-btn[data-tab="pda"],
+#tab-state-pos:checked ~ .hero .tab-btn[data-tab="pos"] {
   background: var(--surface);
   color: var(--text-primary);
 }
 
-body:has(#tab-pda:target) .tab-btn[data-tab="pda"] {
+#tab-state-pda:checked ~ .hero .tab-btn[data-tab="pda"] {
   color: var(--pda-color);
 }
 
-body:has(#tab-pda:target) .tab-btn[data-tab="pda"] .tab-dot,
-body:has(#tab-pos:target) .tab-btn[data-tab="pos"] .tab-dot {
+#tab-state-pda:checked ~ .hero .tab-btn[data-tab="pda"] .tab-dot,
+#tab-state-pos:checked ~ .hero .tab-btn[data-tab="pos"] .tab-dot {
   opacity: 1;
 }
 
+#tab-state-pda:checked ~ .hero .tab-btn[data-tab="pos"],
+#tab-state-pos:checked ~ .hero .tab-btn[data-tab="pda"] {
+  background: rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+#tab-state-pda:checked ~ .hero .tab-btn[data-tab="pos"] .tab-dot,
+#tab-state-pos:checked ~ .hero .tab-btn[data-tab="pda"] .tab-dot {
+  opacity: 0.6;
+}
 
 /* ──────────────────────────────────────────
    5. 본문 레이아웃
@@ -345,17 +353,14 @@ body:has(#tab-pos:target) .tab-btn[data-tab="pos"] .tab-dot {
   display: block;
 }
 
-body:has(#tab-pda:target) #tab-pos {
+#tab-state-pda:checked ~ .main-wrap #tab-pos,
+#tab-state-pos:checked ~ .main-wrap #tab-pda {
   display: none;
 }
 
-body:has(#tab-pda:target) #tab-pda,
-body:has(#tab-pos:target) #tab-pos {
+#tab-state-pda:checked ~ .main-wrap #tab-pda,
+#tab-state-pos:checked ~ .main-wrap #tab-pos {
   display: block;
-}
-
-body:has(#tab-pos:target) #tab-pda {
-  display: none;
 }
 
 /* ──────────────────────────────────────────

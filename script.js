@@ -1,5 +1,5 @@
 /* ============================================================
-   script.js  —  POS·PDA 사용법 안내 사이트
+   script.js  —  POS·PDA 사용 매뉴얼 사이트
    구성:
      1. 콘텐츠 데이터베이스 (CONTENT)
      2. 검색 데이터 인덱스 (SEARCH_DATA)
@@ -477,15 +477,21 @@ function getTabFromHash() {
 function switchTab(tab, btn, updateHash = true) {
   const targetPanel = document.getElementById('tab-' + tab);
   const targetBtn = btn || document.querySelector(`.tab-btn[data-tab="${tab}"]`);
+  const targetState = document.getElementById('tab-state-' + tab);
   if (!targetPanel || !targetBtn) return;
 
   // 탭 패널 / 버튼 비활성화
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.remove('active');
+    b.setAttribute('aria-selected', 'false');
+  });
 
   // 선택한 탭 활성화
+  if (targetState) targetState.checked = true;
   targetPanel.classList.add('active');
   targetBtn.classList.add('active');
+  targetBtn.setAttribute('aria-selected', 'true');
 
   const targetHash = '#tab-' + tab;
   if (updateHash && window.location.hash !== targetHash) {
@@ -497,11 +503,22 @@ function switchTab(tab, btn, updateHash = true) {
   currentOpenId = null;
 }
 
-document.querySelectorAll('.tab-btn[data-tab]').forEach(btn => {
-  btn.addEventListener('click', event => {
-    event.preventDefault();
-    switchTab(btn.dataset.tab, btn);
-  });
+document.addEventListener('click', event => {
+  const tabBtn = event.target.closest('.tab-btn[data-tab]');
+  if (!tabBtn) return;
+
+  event.preventDefault();
+  switchTab(tabBtn.dataset.tab, tabBtn);
+});
+
+document.addEventListener('keydown', event => {
+  if (event.key !== 'Enter' && event.key !== ' ') return;
+
+  const tabBtn = event.target.closest('.tab-btn[data-tab]');
+  if (!tabBtn) return;
+
+  event.preventDefault();
+  switchTab(tabBtn.dataset.tab, tabBtn);
 });
 
 function syncTabFromHash() {

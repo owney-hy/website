@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>POS·PDA 사용법 안내</title>
+  <title>POS·PDA 사용 매뉴얼</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
@@ -18,8 +18,7 @@
 
       <!-- 로고 -->
       <div class="logo">
-        <span class="logo-badge">매뉴얼</span>
-        <span class="logo-text">POS·PDA 사용법 안내</span>
+        <span class="logo-text">POS·PDA 사용 매뉴얼</span>
       </div>
 
       <!-- 검색창 -->
@@ -50,23 +49,25 @@
     </div>
   </header>
 
+  <input class="tab-state" type="radio" name="device-tab" id="tab-state-pda" value="pda">
+  <input class="tab-state" type="radio" name="device-tab" id="tab-state-pos" value="pos" checked>
 
   <!-- ───────────────────────────────────────
        히어로 + 탭 바
   ─────────────────────────────────────────── -->
   <div class="hero">
-    <h1>POS·PDA 사용법 안내</h1>
+    <h1>POS·PDA 사용 매뉴얼</h1>
     <p>결제 단말기 사용 중 막히는 부분을 빠르게 확인하세요.<br>단계별로 쉽게 안내해 드립니다.</p>
 
-    <div class="tab-bar">
-      <a href="#tab-pda" class="tab-btn pda-tab" data-tab="pda">
+    <div class="tab-bar" role="tablist" aria-label="단말기 선택">
+      <label for="tab-state-pda" class="tab-btn pda-tab" data-tab="pda" role="tab" tabindex="0" aria-controls="tab-pda" aria-selected="false">
         <div class="tab-dot"></div>
         📱 PDA 단말기
-      </a>
-      <a href="#tab-pos" class="tab-btn active" data-tab="pos">
+      </label>
+      <label for="tab-state-pos" class="tab-btn active" data-tab="pos" role="tab" tabindex="0" aria-controls="tab-pos" aria-selected="true">
         <div class="tab-dot"></div>
         🖥️ POS 단말기
-      </a>
+      </label>
     </div>
   </div>
 
