@@ -5,9 +5,8 @@
      2. 검색 데이터 인덱스 (SEARCH_DATA)
      3. 탭 전환 (switchTab)
      4. 상세 패널 열기/닫기 (openDetail / closeDetail)
-     5. FAQ 아코디언 (toggleFAQ)
-     6. 검색 기능 (searchInput 이벤트)
-     7. QR 모달 (openQRModal / closeQRModal)
+     5. 검색 기능 (searchInput 이벤트)
+     6. QR 모달 (openQRModal / closeQRModal)
    ============================================================ */
 
 
@@ -18,12 +17,79 @@
      icon     : 이모지
      title    : 제목
      subtitle : 부제목
-     steps    : [{ text }]  — HTML 태그 허용
+     steps    : [{ text, image, imageAlt }]  — text는 HTML 태그 허용, image/imageAlt는 선택
      notice   : 주의사항 문자열 (선택)
      error    : { title, cases[] } — 즉시 연락 박스 (선택)
-     faq      : [{ q, a }]
+     videoUrl : YouTube 영상 URL (선택)
 ────────────────────────────────────────────────────────── */
-const VIDEO_MANUAL_URL = 'pos pda manual/';
+const MANUAL_ASSET_DIR = 'pos pda manual/';
+const VIDEO_MANUAL_URL = '';
+const YOUTUBE_EMBED_ORIGIN = 'https://www.youtube-nocookie.com';
+
+function escapeAttribute(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function getManualAssetUrl(path) {
+  if (!path) return '';
+
+  const value = String(path).trim().replace(/\\/g, '/');
+  const isExternalOrRootPath = /^(?:[a-z][a-z0-9+.-]*:|\/|\.\/|\.\.\/)/i.test(value);
+  const isAlreadyManualPath = value.startsWith(MANUAL_ASSET_DIR);
+
+  if (isExternalOrRootPath) return value;
+
+  const assetPath = isAlreadyManualPath ? value : MANUAL_ASSET_DIR + value;
+  return assetPath.split('/').map(encodeURIComponent).join('/');
+}
+
+function getYouTubeEmbedUrl(url) {
+  if (!url) return '';
+
+  try {
+    const parsed = new URL(url, window.location.href);
+    const host = parsed.hostname.replace(/^www\./, '');
+    let videoId = '';
+
+    if (host === 'youtu.be') {
+      videoId = parsed.pathname.split('/').filter(Boolean)[0] || '';
+    } else if (host === 'youtube.com' || host === 'm.youtube.com' || host === 'youtube-nocookie.com') {
+      const pathParts = parsed.pathname.split('/').filter(Boolean);
+      if (parsed.searchParams.has('v')) {
+        videoId = parsed.searchParams.get('v') || '';
+      } else if (pathParts[0] === 'embed' || pathParts[0] === 'shorts' || pathParts[0] === 'live') {
+        videoId = pathParts[1] || '';
+      }
+    }
+
+    if (videoId) {
+      return `${YOUTUBE_EMBED_ORIGIN}/embed/${encodeURIComponent(videoId)}?rel=0&modestbranding=1`;
+    }
+
+    const playlistId = parsed.searchParams.get('list');
+    if (playlistId && (host === 'youtube.com' || host === 'm.youtube.com')) {
+      return `${YOUTUBE_EMBED_ORIGIN}/embed/videoseries?list=${encodeURIComponent(playlistId)}`;
+    }
+  } catch (error) {
+    return '';
+  }
+
+  return '';
+}
+
+function getExternalVideoUrl(url) {
+  if (!url) return '';
+
+  try {
+    return new URL(url, window.location.href).href;
+  } catch (error) {
+    return '';
+  }
+}
 
 const CONTENT = {
 
@@ -41,12 +107,6 @@ const CONTENT = {
       { text: '결제를 시작하려면 <strong>[결제]</strong> 버튼을 누릅니다.' },
     ],
     notice: '비밀번호 5회 오류 시 계정이 잠깁니다. 관리자에게 초기화 요청하세요.',
-    faq: [
-      { q: '화면이 꺼져 있을 때 어떻게 하나요?',
-        a: '전원 버튼을 3초간 길게 누르면 켜집니다. 절전 모드인 경우 화면을 한 번 터치하면 활성화됩니다.' },
-      { q: '로그인 화면이 나오지 않으면?',
-        a: '단말기를 재시작하세요. 화면 상단의 재시작 버튼을 누르거나, 전원을 껐다가 다시 켜세요.' },
-    ],
   },
 
   'pos-preset': {
@@ -62,10 +122,6 @@ const CONTENT = {
       { text: '잘못 등록한 항목은 PRESET 목록에서 선택 후 <strong>[수정]</strong> 또는 <strong>[삭제]</strong>로 정리합니다.' },
     ],
     notice: 'PRESET 변경은 매장 전체 사용 화면에 반영될 수 있습니다. 운영 중에는 관리자 확인 후 변경하세요.',
-    faq: [
-      { q: 'PRESET 버튼이 보이지 않으면?',
-        a: '권한이 없는 계정일 수 있습니다. 관리자 계정으로 로그인하거나 권한 설정을 확인하세요.' },
-    ],
   },
 
   'pos-card': {
@@ -82,14 +138,6 @@ const CONTENT = {
       { text: '승인 완료 메시지 확인 후 영수증이 자동 출력됩니다.' },
     ],
     notice: '카드 오류 시 카드를 제거한 뒤 다시 삽입하세요. IC칩 방향을 확인해 주세요.',
-    faq: [
-      { q: '카드 결제가 승인 거절되면?',
-        a: '카드사 문제일 수 있습니다. 고객에게 다른 카드 사용 또는 현금 결제 변경을 안내하세요. 단말기 문제가 아닙니다.' },
-      { q: '영수증이 안 나오면?',
-        a: '프린터 용지 부족 여부를 확인하고 용지를 교체하세요. 그래도 안 되면 영수증 재출력 메뉴를 이용하세요.' },
-      { q: '삼성페이·카카오페이도 되나요?',
-        a: 'NFC 기능이 지원되는 단말기라면 가능합니다. 카드처럼 단말기에 스마트폰을 갖다 대면 됩니다.' },
-    ],
   },
 
   'pos-cash': {
@@ -104,10 +152,6 @@ const CONTENT = {
       { text: '고객이 지불하는 금액을 입력하면 <strong>거스름돈 금액이 화면에 표시</strong>됩니다.' },
       { text: '현금영수증 발급 여부를 고객에게 확인합니다.<br>- 발급: 고객 휴대폰 번호 또는 현금영수증 카드 입력<br>- 미발급: [발급 안함] 선택' },
       { text: '결제 완료 후 영수증 출력.' },
-    ],
-    faq: [
-      { q: '현금영수증 발급을 나중에 해달라고 하면?',
-        a: '현금 결제 완료 후에는 별도의 현금영수증 발급 메뉴에서 처리 가능합니다. 단, 당일 내에 처리하세요.' },
     ],
   },
 
@@ -124,7 +168,6 @@ const CONTENT = {
       { text: '전체 결제 완료 후 통합 영수증이 출력됩니다.' },
     ],
     notice: '복합결제 중 카드 결제가 실패하면 이미 처리된 부분은 취소되지 않으므로 주의하세요. 오류 발생 시 관리자에게 문의하세요.',
-    faq: [],
   },
 
   'pos-cancel': {
@@ -140,12 +183,6 @@ const CONTENT = {
       { text: '취소 완료 메시지 확인 후 취소 영수증이 출력됩니다.' },
     ],
     notice: '취소는 반드시 결제 시 사용한 동일 카드로만 가능합니다. 다른 카드로는 취소가 되지 않습니다.',
-    faq: [
-      { q: '어제 결제를 취소해야 하면?',
-        a: '당일 취소가 아닌 경우 [반품] 메뉴를 이용하세요. 처리 방법이 다릅니다.' },
-      { q: '카드사 승인이 이미 된 건도 취소되나요?',
-        a: '네, 단말기에서 취소하면 카드사에도 자동으로 취소 신호가 전달됩니다. 3~5 영업일 내에 환불됩니다.' },
-    ],
   },
 
   'pos-partial': {
@@ -161,7 +198,6 @@ const CONTENT = {
       { text: '부분취소 완료 후 취소 영수증 출력.' },
     ],
     notice: '부분 취소 후 남은 금액이 변경되므로 고객에게 안내하세요. 부분취소가 지원되지 않는 카드사도 있습니다.',
-    faq: [],
   },
 
   'pos-refund': {
@@ -177,7 +213,6 @@ const CONTENT = {
       { text: '반품 완료 후 반품 영수증 출력.' },
     ],
     notice: '카드 반품은 카드사 정책에 따라 최대 1~2일이 걸릴 수 있습니다. 고객에게 안내하세요.',
-    faq: [],
   },
 
   'pos-receipt': {
@@ -190,10 +225,6 @@ const CONTENT = {
       { text: '영수증 번호, 결제 시간, 금액 중 하나로 검색합니다.' },
       { text: '해당 결제 건을 선택하고 <strong>[영수증 재출력]</strong>을 누릅니다.' },
       { text: '영수증이 출력됩니다. "재발행" 도장이 찍혀 나옵니다.' },
-    ],
-    faq: [
-      { q: '전자영수증(문자/카카오)으로 보내려면?',
-        a: '영수증 재출력 화면에서 [문자 전송] 또는 [카카오 전송]을 선택한 뒤 고객 전화번호를 입력하세요.' },
     ],
   },
 
@@ -210,10 +241,6 @@ const CONTENT = {
       { text: '정산 영수증이 출력됩니다. 보관하세요.' },
     ],
     notice: '정산은 하루 1회만 가능합니다. 정산 후에는 당일 데이터를 수정할 수 없으니 신중하게 확인하세요.',
-    faq: [
-      { q: '정산을 실수로 눌렀어요. 취소할 수 있나요?',
-        a: '정산 확정 전에는 취소 가능합니다. 확정 후에는 취소가 불가능하므로 관리자에게 문의하세요.' },
-    ],
   },
 
   'pos-error': {
@@ -236,7 +263,6 @@ const CONTENT = {
         '정산 중 오류가 발생했을 때',
       ],
     },
-    faq: [],
   },
 
 
@@ -247,15 +273,12 @@ const CONTENT = {
     icon: '🔑',
     title: 'PDA 로그인 및 메인 화면',
     subtitle: 'PDA 기기를 처음 시작할 때',
+    videoUrl: 'https://www.youtube.com/watch?v=h9NXl8o-4HU',
     steps: [
       { text: 'PDA 기기의 <strong>전원 버튼을 1~2초</strong> 눌러 켭니다.' },
       { text: '화면에 <strong>로그인 창</strong>이 뜨면 담당자 아이디와 비밀번호를 입력합니다.' },
       { text: '로그인 완료 후 메인 메뉴가 나타납니다. 결제, 취소, 영수증, 정산, PRESET 메뉴가 있습니다.' },
       { text: '화면이 꺼지는 것을 방지하려면 설정에서 <strong>화면 꺼짐 시간을 늘려두는 것</strong>을 권장합니다.' },
-    ],
-    faq: [
-      { q: 'PDA 배터리가 부족할 때?',
-        a: '화면 상단에 배터리 아이콘이 빨간색이면 충전기를 연결하세요. 충전 중에도 사용 가능합니다.' },
     ],
   },
 
@@ -272,10 +295,6 @@ const CONTENT = {
       { text: '필요 없는 항목은 PRESET 목록에서 선택 후 <strong>[수정]</strong> 또는 <strong>[삭제]</strong>합니다.' },
     ],
     notice: 'PDA PRESET은 단말기 또는 계정 권한에 따라 표시 항목이 다를 수 있습니다.',
-    faq: [
-      { q: 'PRESET 저장이 안 되면?',
-        a: '네트워크 연결 상태를 확인한 뒤 다시 저장하세요. 계속 실패하면 관리자에게 권한 확인을 요청하세요.' },
-    ],
   },
 
   'pda-card': {
@@ -291,10 +310,6 @@ const CONTENT = {
       { text: '승인 완료 메시지를 확인한 뒤 영수증 출력 또는 전송 여부를 선택합니다.' },
     ],
     notice: '카드 인식이 안 되면 IC칩 방향과 리더기 접촉 상태를 확인한 뒤 다시 시도하세요.',
-    faq: [
-      { q: '모바일 간편결제도 가능한가요?',
-        a: 'NFC 또는 간편결제 기능이 활성화된 단말기라면 카드 결제와 같은 흐름으로 처리할 수 있습니다.' },
-    ],
   },
 
   'pda-cash': {
@@ -308,10 +323,6 @@ const CONTENT = {
       { text: '결제 수단에서 <strong>[현금]</strong>을 선택합니다.' },
       { text: '받은 금액을 입력하고 화면에 표시되는 거스름돈을 확인합니다.' },
       { text: '현금영수증 발급 여부를 선택한 뒤 결제를 완료합니다.' },
-    ],
-    faq: [
-      { q: '현금영수증 정보를 잘못 입력했으면?',
-        a: '당일 내 현금영수증 메뉴에서 취소 후 재발급하세요. 권한이 없으면 관리자에게 요청하세요.' },
     ],
   },
 
@@ -328,7 +339,6 @@ const CONTENT = {
       { text: '전체 결제 금액이 맞는지 확인한 뒤 영수증을 출력하거나 전송합니다.' },
     ],
     notice: '복합 결제 중 일부 결제가 실패하면 완료된 결제 내역을 확인한 뒤 취소 또는 재시도하세요.',
-    faq: [],
   },
 
   'pda-cancel': {
@@ -344,10 +354,6 @@ const CONTENT = {
       { text: '취소 완료 메시지와 취소 영수증을 확인합니다.' },
     ],
     notice: '카드 결제 취소는 반드시 결제에 사용한 동일 카드로 처리해야 합니다.',
-    faq: [
-      { q: '취소 내역이 조회되지 않으면?',
-        a: '조회 날짜와 결제 시간을 다시 확인하세요. 전날 이전 결제 건은 반품 메뉴를 사용합니다.' },
-    ],
   },
 
   'pda-partial': {
@@ -363,7 +369,6 @@ const CONTENT = {
       { text: '부분취소 완료 후 남은 결제 금액을 고객에게 안내합니다.' },
     ],
     notice: '일부 카드사 또는 결제 방식은 부분 취소가 제한될 수 있습니다.',
-    faq: [],
   },
 
   'pda-refund': {
@@ -379,7 +384,6 @@ const CONTENT = {
       { text: '반품 완료 메시지와 반품 영수증을 확인합니다.' },
     ],
     notice: '카드 반품은 카드사 정책에 따라 환불 반영까지 시간이 걸릴 수 있습니다.',
-    faq: [],
   },
 
   'pda-receipt': {
@@ -393,10 +397,6 @@ const CONTENT = {
       { text: '해당 결제 건을 선택하고 <strong>[영수증 재출력]</strong>을 누릅니다.' },
       { text: '연결된 프린터 또는 전자영수증 전송 방식을 선택합니다.' },
       { text: '출력 또는 전송 완료 여부를 확인합니다.' },
-    ],
-    faq: [
-      { q: '프린터가 연결되지 않으면?',
-        a: '블루투스 또는 네트워크 프린터 연결 상태를 확인한 뒤 다시 출력하세요.' },
     ],
   },
 
@@ -413,10 +413,6 @@ const CONTENT = {
       { text: '정산 영수증을 출력하거나 관리자에게 전송합니다.' },
     ],
     notice: '정산 확정 후에는 당일 데이터를 수정하기 어렵습니다. 금액을 반드시 확인하세요.',
-    faq: [
-      { q: '정산 메뉴가 비활성화되어 있으면?',
-        a: '정산 권한이 없는 계정일 수 있습니다. 관리자 계정으로 로그인하거나 권한을 확인하세요.' },
-    ],
   },
 
   'pda-error': {
@@ -438,7 +434,6 @@ const CONTENT = {
         '기기가 완전히 먹통이 될 때',
       ],
     },
-    faq: [],
   },
 };
 
@@ -568,12 +563,28 @@ function openDetail(id) {
   /* ── HTML 조각 빌더 ─────────────────────────── */
 
   // 단계별 가이드
-  const stepsHTML = data.steps.map((s, i) => `
-    <div class="step ${stepCls}">
-      <div class="step-num" style="background:${numColor}">${i + 1}</div>
-      <div class="step-text">${s.text}</div>
-    </div>
-  `).join('');
+  const stepsHTML = data.steps.map((s, i) => {
+    const stepImage = getManualAssetUrl(s.image || s.imageUrl);
+    const stepImageHTML = stepImage ? `
+      <div class="step-image-wrap">
+        <img
+          class="step-image"
+          src="${escapeAttribute(stepImage)}"
+          alt="${escapeAttribute(s.imageAlt || `${data.title} ${i + 1}단계 이미지`)}"
+          loading="lazy"
+        >
+      </div>` : '';
+
+    return `
+      <div class="step ${stepCls}${stepImage ? ' has-step-image' : ''}">
+        <div class="step-main">
+          <div class="step-num" style="background:${numColor}">${i + 1}</div>
+          <div class="step-text">${s.text}</div>
+        </div>
+        ${stepImageHTML}
+      </div>
+    `;
+  }).join('');
 
   // 주의사항 박스 (선택)
   const noticeHTML = data.notice ? `
@@ -591,31 +602,26 @@ function openDetail(id) {
       </ul>
     </div>` : '';
 
-  // FAQ 아코디언 (선택)
-  const faqHTML = data.faq && data.faq.length ? `
-    <div class="faq-section">
-      <div class="faq-title">💬 자주 묻는 질문</div>
-      <div class="faq-list">
-        ${data.faq.map((f, i) => `
-          <div class="faq-item" id="faq-${id}-${i}">
-            <div class="faq-q" onclick="toggleFAQ('faq-${id}-${i}')">
-              <span>Q. ${f.q}</span>
-              <span class="faq-arrow">▼</span>
-            </div>
-            <div class="faq-a">A. ${f.a}</div>
-          </div>
-        `).join('')}
+  const sourceVideoUrl = data.videoUrl || VIDEO_MANUAL_URL;
+  const manualVideoUrl = getYouTubeEmbedUrl(sourceVideoUrl);
+  const externalVideoUrl = getExternalVideoUrl(sourceVideoUrl);
+  const manualVideoHTML = manualVideoUrl ? `
+    <div class="manual-video-block">
+      <div class="manual-video-player">
+        <iframe
+          src="${manualVideoUrl}"
+          title="${escapeAttribute(data.title)} 동영상 매뉴얼"
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
       </div>
+      ${externalVideoUrl ? `
+        <a class="manual-video-fallback" href="${escapeAttribute(externalVideoUrl)}" target="_blank" rel="noopener">
+          유튜브에서 직접 보기
+        </a>` : ''}
     </div>` : '';
-
-  const manualLinkHTML = `
-    <a class="manual-video-link" href="${data.videoUrl || VIDEO_MANUAL_URL}" target="_blank" rel="noopener">
-      <span class="manual-video-icon">▶</span>
-      <span>
-        <strong>동영상 매뉴얼 보기</strong>
-        <small>새 창에서 확인</small>
-      </span>
-    </a>`;
 
   /* ── 패널 DOM 생성 ──────────────────────────── */
   const panel = document.createElement('div');
@@ -629,11 +635,10 @@ function openDetail(id) {
       </div>
       <button class="close-btn" onclick="closeDetail('${id}')">✕</button>
     </div>
-    ${manualLinkHTML}
+    ${manualVideoHTML}
     <div class="steps">${stepsHTML}</div>
     ${noticeHTML}
     ${errorHTML}
-    ${faqHTML}
   `;
 
   container.appendChild(panel);
@@ -656,21 +661,7 @@ function closeDetail(id) {
 
 
 /* ──────────────────────────────────────────────────────────
-   5. FAQ 아코디언 토글
-────────────────────────────────────────────────────────── */
-
-/**
- * FAQ 항목을 열거나 닫습니다.
- * @param {string} itemId - faq-item 요소의 id
- */
-function toggleFAQ(itemId) {
-  const item = document.getElementById(itemId);
-  if (item) item.classList.toggle('open');
-}
-
-
-/* ──────────────────────────────────────────────────────────
-   6. 검색 기능
+   5. 검색 기능
 ────────────────────────────────────────────────────────── */
 
 const searchInput   = document.getElementById('searchInput');
@@ -730,7 +721,7 @@ document.addEventListener('click', (e) => {
 
 
 /* ──────────────────────────────────────────────────────────
-   7. QR 모달
+   6. QR 모달
 ────────────────────────────────────────────────────────── */
 
 /** QR 모달 열기 */
