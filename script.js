@@ -495,6 +495,7 @@ function switchTab(tab, btn, updateHash = true) {
 
   // 열려 있던 상세 패널 초기화
   document.querySelectorAll('.detail-panel').forEach(p => p.remove());
+  clearOpenManualCards();
   currentOpenId = null;
 }
 
@@ -537,19 +538,38 @@ if (initialTab) switchTab(initialTab, undefined, false);
  * 같은 ID를 다시 클릭하면 패널이 닫힙니다.
  * @param {string} id - CONTENT 객체의 키
  */
+function restoreScrollPosition(x, y) {
+  window.scrollTo(x, y);
+  requestAnimationFrame(() => window.scrollTo(x, y));
+}
+
+function getManualCard(id) {
+  return Array.from(document.querySelectorAll('.func-card'))
+    .find(card => card.getAttribute('onclick') === `openDetail('${id}')`);
+}
+
+function clearOpenManualCards() {
+  document.querySelectorAll('.func-card.is-open')
+    .forEach(card => card.classList.remove('is-open'));
+}
+
 function openDetail(id) {
   const data = CONTENT[id];
   if (!data) return;
 
-  const container = document.getElementById('detail-container-' + data.tab);
+  const previousScrollX = window.scrollX;
+  const previousScrollY = window.scrollY;
+  const triggerCard = getManualCard(id);
+  const container = triggerCard ? triggerCard.parentElement : document.getElementById('detail-container-' + data.tab);
 
   // 기존 패널 제거
-  const existing = container.querySelector('.detail-panel');
-  if (existing) existing.remove();
+  document.querySelectorAll('.detail-panel').forEach(panel => panel.remove());
+  clearOpenManualCards();
 
   // 같은 항목 재클릭 → 닫기
   if (currentOpenId === id) {
     currentOpenId = null;
+    restoreScrollPosition(previousScrollX, previousScrollY);
     return;
   }
   currentOpenId = id;
@@ -641,8 +661,13 @@ function openDetail(id) {
     ${errorHTML}
   `;
 
-  container.appendChild(panel);
-  panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (triggerCard) {
+    triggerCard.classList.add('is-open');
+    triggerCard.insertAdjacentElement('afterend', panel);
+  } else {
+    container.appendChild(panel);
+  }
+  restoreScrollPosition(previousScrollX, previousScrollY);
 }
 
 /**
@@ -653,10 +678,13 @@ function closeDetail(id) {
   const data = CONTENT[id];
   if (!data) return;
 
-  const container = document.getElementById('detail-container-' + data.tab);
-  const panel     = container.querySelector('.detail-panel');
+  const previousScrollX = window.scrollX;
+  const previousScrollY = window.scrollY;
+  const panel = document.querySelector('.detail-panel');
   if (panel) panel.remove();
+  clearOpenManualCards();
   currentOpenId = null;
+  restoreScrollPosition(previousScrollX, previousScrollY);
 }
 
 
