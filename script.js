@@ -275,7 +275,7 @@ const CONTENT = {
     subtitle: 'PDA 기기를 처음 시작할 때',
     videoUrl: 'https://www.youtube.com/embed/h9NXl8o-4HU?si=UcEuxH7M02abROSA',
     steps: [
-      { text: 'PDA 기기의 <strong>전원 버튼을 1~2초</strong> 눌러 켭니다.' },
+      { text: 'PDA 기기의 <strong>전원 버튼을 1~2초</strong> 눌러 켭니다.', image: 'test image.png', imageAlt: '전원 버튼 위치'},
       { text: '화면에 <strong>로그인 창</strong>이 뜨면 담당자 아이디와 비밀번호를 입력합니다.' },
       { text: '로그인 완료 후 메인 메뉴가 나타납니다. 결제, 취소, 영수증, 정산, PRESET 메뉴가 있습니다.' },
       { text: '화면이 꺼지는 것을 방지하려면 설정에서 <strong>화면 꺼짐 시간을 늘려두는 것</strong>을 권장합니다.' },
@@ -637,24 +637,12 @@ function openDetail(id) {
           allowfullscreen
         ></iframe>
       </div>
-      ${externalVideoUrl ? `
-        <a class="manual-video-fallback" href="${escapeAttribute(externalVideoUrl)}" target="_blank" rel="noopener">
-          유튜브에서 직접 보기
-        </a>` : ''}
     </div>` : '';
 
   /* ── 패널 DOM 생성 ──────────────────────────── */
   const panel = document.createElement('div');
   panel.className = `detail-panel open ${isPDA ? 'pda-detail' : ''}`;
   panel.innerHTML = `
-    <div class="detail-header">
-      <div class="detail-icon" style="background:${iconBg}">${data.icon}</div>
-      <div>
-        <div class="detail-title">${data.title}</div>
-        <div class="detail-subtitle">${data.subtitle}</div>
-      </div>
-      <button class="close-btn" onclick="closeDetail('${id}')">✕</button>
-    </div>
     ${manualVideoHTML}
     <div class="steps">${stepsHTML}</div>
     ${noticeHTML}
