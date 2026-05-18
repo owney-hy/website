@@ -724,7 +724,9 @@ header {
 }
 
 .step-image-wrap {
-  max-width: 100%;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
   border-radius: 8px;
   overflow: hidden;
   background: var(--surface);
@@ -735,7 +737,6 @@ header {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 300px;
   object-fit: contain;
 }
 
@@ -928,8 +929,8 @@ header {
   /* 모바일: 카드 1열 */
   .card-grid  { grid-template-columns: 1fr; }
 
-  .step-image {
-    max-height: none;
+  .step-image-wrap {
+    max-width: 100%;
   }
 
   .detail-panel { padding: 20px; }
