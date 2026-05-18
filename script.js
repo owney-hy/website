@@ -517,8 +517,14 @@ function syncTabFromHash() {
 window.addEventListener('hashchange', syncTabFromHash);
 window.addEventListener('popstate', syncTabFromHash);
 
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+
 const initialTab = getTabFromHash();
 if (initialTab) switchTab(initialTab, undefined, false);
+
+requestAnimationFrame(() => window.scrollTo(0, 0));
 
 
 /* ──────────────────────────────────────────────────────────
