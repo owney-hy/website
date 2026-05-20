@@ -653,7 +653,11 @@ function openDetail(id) {
   } else {
     container.appendChild(panel);
   }
-  restoreScrollPosition(previousScrollX, previousScrollY);
+
+  const headerHeight = document.querySelector('header')?.offsetHeight ?? 0;
+  const scrollTarget = triggerCard ?? panel;
+  const targetTop = scrollTarget.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
+  window.scrollTo({ top: targetTop, behavior: 'smooth' });
 }
 
 /**
