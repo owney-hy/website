@@ -195,8 +195,8 @@ header {
 
 /* QR 버튼 */
 .qr-btn {
-  background: var(--primary);
-  color: #fff;
+  background: linear-gradient(135deg, #22A9E8 0%, #57E5BD 55%, #2FD077 100%);
+  color: #111827;
   border: none;
   border-radius: 100px;
   padding: 9px 18px;
@@ -205,14 +205,15 @@ header {
   font-family: inherit;
   cursor: pointer;
   white-space: nowrap;
-  transition: background 0.2s;
+  transition: filter 0.2s, transform 0.2s;
   display: flex;
   align-items: center;
   gap: 6px;
 }
 
 .qr-btn:hover {
-  background: var(--primary-dark);
+  filter: brightness(0.96) saturate(1.08);
+  transform: translateY(-1px);
 }
 
 
@@ -220,10 +221,10 @@ header {
    4. 히어로 + 탭 바
 ────────────────────────────────────────── */
 .hero {
-  background: linear-gradient(135deg, #0047CC 0%, #0064FF 50%, #338BFF 100%);
+  background: linear-gradient(135deg, #24A9E2 0%, #62E7C0 52%, #31CF78 100%);
   padding: 48px 24px 0;
   text-align: center;
-  color: #fff;
+  color: #111827;
   position: relative;
   overflow: hidden;
   isolation: isolate;
@@ -259,7 +260,7 @@ header {
 .tab-btn {
   background: rgba(182, 34, 211, 0.18);
   border: none;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(17, 24, 39, 0.78);
   appearance: none;
   font-family: inherit;
   font-size: 16px;
@@ -318,7 +319,7 @@ header {
 #tab-state-pda:checked ~ .hero .tab-btn[data-tab="pos"],
 #tab-state-pos:checked ~ .hero .tab-btn[data-tab="pda"] {
   background: rgba(255, 255, 255, 0.18);
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(17, 24, 39, 0.78);
 }
 
 #tab-state-pda:checked ~ .hero .tab-btn[data-tab="pos"] .tab-dot,

@@ -100,7 +100,7 @@ const CONTENT = {
     icon: '🔑',
     title: '영업 개시',
     subtitle: '판매사원 로그인 방법',
-    videoUrl: 'https://youtu.be/T47OQJ9s4nY?si=ackShVSGSh2Yr14W',
+    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
     steps: [
       { text: '<strong>영업개시</strong>를 클릭합니다(단축키 F1).', image: 'pos-login-step1.png' },
       { text: '<strong>사원번호</strong>와 <strong>비밀번호</strong>를 입력하고 <strong>등록</strong>합니다.', image: 'pos-login-step2.png' },
@@ -112,7 +112,7 @@ const CONTENT = {
     icon: '⚙️',
     title: 'PRESET 등록',
     subtitle: 'POS에서 자주 쓰는 상품을 빠르게 등록하는 방법',
-    videoUrl: 'https://youtu.be/T47OQJ9s4nY?si=ackShVSGSh2Yr14W',
+    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
     steps: [
       { text: '<strong>Preset</strong>을 클릭합니다.', image: 'pos-preset-step1.png' },
       { text: '<strong>프리셋 확장</strong>을 클릭합니다.', image: 'pos-preset-step2.png' },
@@ -130,7 +130,7 @@ const CONTENT = {
     icon: '💵',
     title: '현금 결제',
     subtitle: '현금 결제 및 현금영수증 처리 방법',
-    videoUrl: 'https://youtu.be/T47OQJ9s4nY?si=ackShVSGSh2Yr14W',
+    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pos-cash-step1.png' },
       { text: '상품의 금액을 입력하고 <strong>등록</strong>을 클릭합니다.', image: 'pos-cash-step2.png' },
@@ -145,7 +145,7 @@ const CONTENT = {
     icon: '💳',
     title: '카드 결제',
     subtitle: '카드 삽입·센싱 결제 방법',
-    videoUrl: 'https://youtu.be/T47OQJ9s4nY?si=ackShVSGSh2Yr14W',
+    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pos-card-step1.png' },
       { text: '상품의 금액을 입력하고 <strong>등록</strong>을 클릭합니다.', image: 'pos-card-step2.png' },
@@ -162,7 +162,7 @@ const CONTENT = {
     icon: '📲',
     title: 'L.PAY 결제',
     subtitle: 'L.PAY 바코드 스캔 결제 방법',
-    videoUrl: 'https://youtu.be/T47OQJ9s4nY?si=ackShVSGSh2Yr14Whttps://youtu.be/T47OQJ9s4nY?si=ackShVSGSh2Yr14W',
+    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqndhttps://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pos-lpay-step1.png' },
       { text: '상품의 금액을 입력하고 <strong>등록</strong>을 클릭합니다.', image: 'pos-lpay-step2.png' },
@@ -180,7 +180,7 @@ const CONTENT = {
     icon: '🎁',
     title: '상품권 결제',
     subtitle: '상품권 결제 및 거스름 처리 방법',
-    videoUrl: 'https://youtu.be/T47OQJ9s4nY?si=ackShVSGSh2Yr14W',
+    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pos-giftcard-step1.png' },
       { text: '상품의 금액을 입력하고 <strong>등록</strong>을 클릭합니다.', image: 'pos-giftcard-step2.png' },
@@ -197,7 +197,7 @@ const CONTENT = {
     icon: '📱',
     title: '모바일상품권 결제',
     subtitle: '모바일 상품권 결제 방법',
-    videoUrl: 'https://youtu.be/T47OQJ9s4nY?si=ackShVSGSh2Yr14W',
+    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pos-mobile-giftcard-step1.png' },
       { text: '상품의 금액을 입력하고 <strong>등록</strong>을 클릭합니다.', image: 'pos-mobile-giftcard-step2.png' },
@@ -212,7 +212,7 @@ const CONTENT = {
     icon: '⭐',
     title: 'L.POINT 결제',
     subtitle: 'L.POINT 포인트 결제 방법',
-    videoUrl: 'https://youtu.be/T47OQJ9s4nY?si=ackShVSGSh2Yr14W',
+    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pos-lpoint-step1.png' },
       { text: '상품의 금액을 입력하고 <strong>등록</strong>을 클릭합니다.', image: 'pos-lpoint-step2.png' },
@@ -230,7 +230,7 @@ const CONTENT = {
     icon: '🔄',
     title: '반품',
     subtitle: '반품 처리 방법',
-    videoUrl: 'https://youtu.be/T47OQJ9s4nY?si=ackShVSGSh2Yr14W',
+    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
     steps: [
       { text: '<strong>반품</strong>을 클릭합니다.', image: 'pos-refund-step1.png' },
       { text: '<strong>취소 사유</strong>를 선택합니다.', image: 'pos-refund-step2.png' },
@@ -248,7 +248,7 @@ const CONTENT = {
     icon: '🔑',
     title: '영업 개시',
     subtitle: '판매사원 로그인 방법',
-    videoUrl: 'https://youtu.be/T47OQJ9s4nY?si=ackShVSGSh2Yr14W',
+    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
     steps: [
       { text: '<strong>판매사원 로그인</strong>을 클릭합니다.', image: 'pda-login-step1.png' },
       { text: '<strong>ID와 비밀번호</strong>를 입력하고 <strong>로그인</strong> 버튼을 클릭합니다.', image: 'pda-login-step2.png' },
@@ -260,7 +260,7 @@ const CONTENT = {
     icon: '⚙️',
     title: 'PRESET 등록',
     subtitle: 'PDA에서 자주 쓰는 상품을 빠르게 등록하는 방법',
-    videoUrl: 'https://youtu.be/T47OQJ9s4nY?si=ackShVSGSh2Yr14W',
+    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
     steps: [
       { text: '<strong>PRESET 확장</strong> 버튼을 클릭합니다.', image: 'pda-preset-step1.png' },
       { text: '등록을 원하는 <strong>그룹을 선택</strong>합니다.', image: 'pda-preset-step2.png' },
@@ -275,7 +275,7 @@ const CONTENT = {
     icon: '💵',
     title: '현금 결제',
     subtitle: '현금 결제 및 현금영수증 처리 방법',
-    videoUrl: 'https://youtu.be/T47OQJ9s4nY?si=ackShVSGSh2Yr14W',
+    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pda-cash-step1.png' },
       { text: '상품의 금액을 입력하고 <strong>확인</strong>을 클릭합니다.', image: 'pda-cash-step2.png' },
@@ -293,7 +293,7 @@ const CONTENT = {
     icon: '💳',
     title: '카드 결제',
     subtitle: '카드 삽입·센싱 결제 방법',
-    videoUrl: 'https://youtu.be/T47OQJ9s4nY?si=ackShVSGSh2Yr14W',
+    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
     steps: [
       { text: '<strong>등록할 상품</strong>을 클릭합니다.', image: 'pda-card-step1.png' },
       { text: '<strong>상품의 금액</strong>을 입력하고 확인을 클릭합니다.', image: 'pda-card-step2.png' },
@@ -312,7 +312,7 @@ const CONTENT = {
     icon: '📲',
     title: 'L.PAY 결제',
     subtitle: 'L.PAY 바코드 스캔 결제 방법',
-    videoUrl: 'https://youtu.be/T47OQJ9s4nY?si=ackShVSGSh2Yr14W',
+    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pda-lpay-step1.png' },
       { text: '상품의 금액을 입력하고 <strong>확인</strong>을 클릭합니다.', image: 'pda-lpay-step2.png' },
@@ -328,7 +328,7 @@ const CONTENT = {
     icon: '🎁',
     title: '상품권 결제',
     subtitle: '지류 상품권 결제 및 거스름 처리 방법',
-    videoUrl: 'https://youtu.be/T47OQJ9s4nY?si=ackShVSGSh2Yr14W',
+    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pda-giftcard-step1.png' },
       { text: '상품의 금액을 입력하고 <strong>확인</strong>을 클릭합니다.', image: 'pda-giftcard-step2.png' },
@@ -348,7 +348,7 @@ const CONTENT = {
     icon: '📱',
     title: '모바일상품권 결제',
     subtitle: '모바일 상품권 스캔 결제 방법',
-    videoUrl: 'https://youtu.be/T47OQJ9s4nY?si=ackShVSGSh2Yr14W',
+    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pda-mobile-giftcard-step1.png' },
       { text: '상품의 금액을 입력하고 <strong>확인</strong>을 클릭합니다.', image: 'pda-mobile-giftcard-step2.png' },
@@ -365,7 +365,7 @@ const CONTENT = {
     icon: '⭐',
     title: 'L.POINT 결제',
     subtitle: 'L.POINT 포인트 결제 방법',
-    videoUrl: 'https://youtu.be/T47OQJ9s4nY?si=ackShVSGSh2Yr14W',
+    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
     steps: [
       { text: '<strong>등록할 상품</strong>을 클릭합니다.', image: 'pda-lpoint-step1.png' },
       { text: '<strong>상품의 금액</strong>을 입력하고 확인을 클릭합니다.', image: 'pda-lpoint-step2.png' },
@@ -383,7 +383,7 @@ const CONTENT = {
     icon: '🔄',
     title: '반품',
     subtitle: '영수증 조회 후 반품 처리 방법',
-    videoUrl: 'https://youtu.be/T47OQJ9s4nY?si=ackShVSGSh2Yr14W',
+    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
     steps: [
       { text: '<strong>반품등록</strong>을 클릭합니다.', image: 'pda-refund-step1.png' },
       { text: '<strong>영수증 바코드 스캔</strong> 혹은 원거래 정보를 입력하고 반품등록을 클릭합니다.', image: 'pda-refund-step2.png' },
