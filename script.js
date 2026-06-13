@@ -398,13 +398,34 @@ const CONTENT = {
    2. 검색 인덱스 자동 생성
    — CONTENT 객체에서 텍스트를 추출해 keywords 문자열로 변환
 ────────────────────────────────────────────────────────── */
-const SEARCH_DATA = Object.entries(CONTENT).map(([id, d]) => ({
-  id,
-  title: d.title,
-  tab: d.tab,
-  keywords: (d.title + ' ' + d.subtitle + ' ' + d.steps.map(s => s.text).join(' '))
-    .replace(/<[^>]+>/g, ''),   // HTML 태그 제거
-}));
+function normalizeSearchText(value) {
+  return String(value)
+    .normalize('NFKC')
+    .toLowerCase();
+}
+
+function normalizeSearchCompact(value) {
+  return normalizeSearchText(value).replace(/[\s._-]+/g, '');
+}
+
+const SEARCH_DATA = Object.entries(CONTENT).map(([id, d]) => {
+  const keywords = [
+    id,
+    d.tab,
+    d.title,
+    d.subtitle,
+    d.steps.map(s => s.text).join(' '),
+  ].join(' ').replace(/<[^>]+>/g, '');
+
+  return {
+    id,
+    title: d.title,
+    tab: d.tab,
+    keywords,
+    searchText: normalizeSearchText(keywords),
+    searchCompact: normalizeSearchCompact(keywords),
+  };
+});
 
 
 /* ──────────────────────────────────────────────────────────
@@ -652,6 +673,8 @@ const searchResults = document.getElementById('searchResults');
 /** 입력값 변화 시 검색 결과 갱신 */
 searchInput.addEventListener('input', function () {
   const q = this.value.trim();
+  const normalizedQuery = normalizeSearchText(q);
+  const compactQuery = normalizeSearchCompact(q);
 
   if (!q) {
     searchResults.classList.remove('show');
@@ -660,7 +683,8 @@ searchInput.addEventListener('input', function () {
 
   // keywords 또는 title에서 검색어 포함 여부 확인
   const matches = SEARCH_DATA.filter(d =>
-    d.keywords.includes(q) || d.title.includes(q)
+    d.searchText.includes(normalizedQuery)
+    || d.searchCompact.includes(compactQuery)
   ).slice(0, 8);
 
   if (!matches.length) {
