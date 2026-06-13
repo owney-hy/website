@@ -248,7 +248,7 @@ const CONTENT = {
     icon: '🔑',
     title: '영업 개시',
     subtitle: '판매사원 로그인 방법',
-    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
+    videoUrl: 'https://youtu.be/wz7WJtk-Ljc?si=38BfEASuISxHFTHE',
     steps: [
       { text: '<strong>판매사원 로그인</strong>을 클릭합니다.', image: 'pda-login-step1.png' },
       { text: '<strong>ID와 비밀번호</strong>를 입력하고 <strong>로그인</strong> 버튼을 클릭합니다.', image: 'pda-login-step2.png' },
@@ -260,7 +260,7 @@ const CONTENT = {
     icon: '⚙️',
     title: 'PRESET 등록',
     subtitle: 'PDA에서 자주 쓰는 상품을 빠르게 등록하는 방법',
-    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
+    videoUrl: 'https://youtu.be/JRXb8fIPY4M?si=JgEXWFzpyIm7PGlo',
     steps: [
       { text: '<strong>PRESET 확장</strong> 버튼을 클릭합니다.', image: 'pda-preset-step1.png' },
       { text: '등록을 원하는 <strong>그룹을 선택</strong>합니다.', image: 'pda-preset-step2.png' },
@@ -275,7 +275,7 @@ const CONTENT = {
     icon: '💵',
     title: '현금 결제',
     subtitle: '현금 결제 및 현금영수증 처리 방법',
-    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
+    videoUrl: 'https://youtu.be/o3ZvbeeB_C8?si=uqP7DEAiTJhzsx3d',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pda-cash-step1.png' },
       { text: '상품의 금액을 입력하고 <strong>확인</strong>을 클릭합니다.', image: 'pda-cash-step2.png' },
@@ -293,7 +293,7 @@ const CONTENT = {
     icon: '💳',
     title: '카드 결제',
     subtitle: '카드 삽입·센싱 결제 방법',
-    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
+    videoUrl: 'https://youtu.be/8trMxxT__vs?si=ccgdXFFy4UWLWvKC',
     steps: [
       { text: '<strong>등록할 상품</strong>을 클릭합니다.', image: 'pda-card-step1.png' },
       { text: '<strong>상품의 금액</strong>을 입력하고 확인을 클릭합니다.', image: 'pda-card-step2.png' },
@@ -312,7 +312,7 @@ const CONTENT = {
     icon: '📲',
     title: 'L.PAY 결제',
     subtitle: 'L.PAY 바코드 스캔 결제 방법',
-    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
+    videoUrl: 'https://youtu.be/ZSs3h4c6n9c?si=ks1ZKbGlKsJqUSEI',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pda-lpay-step1.png' },
       { text: '상품의 금액을 입력하고 <strong>확인</strong>을 클릭합니다.', image: 'pda-lpay-step2.png' },
@@ -328,7 +328,7 @@ const CONTENT = {
     icon: '🎁',
     title: '상품권 결제',
     subtitle: '지류 상품권 결제 및 거스름 처리 방법',
-    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
+    videoUrl: 'https://youtu.be/TOwVuTjA_bI?si=QoIlwJ7M4kl7tH8k',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pda-giftcard-step1.png' },
       { text: '상품의 금액을 입력하고 <strong>확인</strong>을 클릭합니다.', image: 'pda-giftcard-step2.png' },
@@ -348,7 +348,7 @@ const CONTENT = {
     icon: '📱',
     title: '모바일상품권 결제',
     subtitle: '모바일 상품권 스캔 결제 방법',
-    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
+    videoUrl: 'https://youtu.be/opRzWw3pyJs?si=_CIJbqoSyI8ms_bc',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pda-mobile-giftcard-step1.png' },
       { text: '상품의 금액을 입력하고 <strong>확인</strong>을 클릭합니다.', image: 'pda-mobile-giftcard-step2.png' },
@@ -365,7 +365,7 @@ const CONTENT = {
     icon: '⭐',
     title: 'L.POINT 결제',
     subtitle: 'L.POINT 포인트 결제 방법',
-    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
+    videoUrl: 'https://youtu.be/ziocjVaFySU?si=IrNCuy9peaMjbvyh',
     steps: [
       { text: '<strong>등록할 상품</strong>을 클릭합니다.', image: 'pda-lpoint-step1.png' },
       { text: '<strong>상품의 금액</strong>을 입력하고 확인을 클릭합니다.', image: 'pda-lpoint-step2.png' },
@@ -383,7 +383,7 @@ const CONTENT = {
     icon: '🔄',
     title: '반품',
     subtitle: '영수증 조회 후 반품 처리 방법',
-    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
+    videoUrl: 'https://youtu.be/TxGKMT99dlA?si=GAqEQFnOIChidsI7',
     steps: [
       { text: '<strong>반품등록</strong>을 클릭합니다.', image: 'pda-refund-step1.png' },
       { text: '<strong>영수증 바코드 스캔</strong> 혹은 원거래 정보를 입력하고 반품등록을 클릭합니다.', image: 'pda-refund-step2.png' },
@@ -398,27 +398,13 @@ const CONTENT = {
    2. 검색 인덱스 자동 생성
    — CONTENT 객체에서 텍스트를 추출해 keywords 문자열로 변환
 ────────────────────────────────────────────────────────── */
-function normalizeSearchText(value) {
-  return String(value).toLocaleLowerCase('ko-KR');
-}
-
-const SEARCH_DATA = Object.entries(CONTENT).map(([id, d]) => {
-  const keywords = [
-    id,
-    d.tab,
-    d.title,
-    d.subtitle,
-    d.steps.map(s => s.text).join(' '),
-  ].join(' ').replace(/<[^>]+>/g, '');
-
-  return {
-    id,
-    title: d.title,
-    tab: d.tab,
-    keywords,
-    searchText: normalizeSearchText(keywords),
-  };
-});
+const SEARCH_DATA = Object.entries(CONTENT).map(([id, d]) => ({
+  id,
+  title: d.title,
+  tab: d.tab,
+  keywords: (d.title + ' ' + d.subtitle + ' ' + d.steps.map(s => s.text).join(' '))
+    .replace(/<[^>]+>/g, ''),   // HTML 태그 제거
+}));
 
 
 /* ──────────────────────────────────────────────────────────
@@ -666,7 +652,6 @@ const searchResults = document.getElementById('searchResults');
 /** 입력값 변화 시 검색 결과 갱신 */
 searchInput.addEventListener('input', function () {
   const q = this.value.trim();
-  const normalizedQuery = normalizeSearchText(q);
 
   if (!q) {
     searchResults.classList.remove('show');
@@ -674,7 +659,9 @@ searchInput.addEventListener('input', function () {
   }
 
   // keywords 또는 title에서 검색어 포함 여부 확인
-  const matches = SEARCH_DATA.filter(d => d.searchText.includes(normalizedQuery)).slice(0, 8);
+  const matches = SEARCH_DATA.filter(d =>
+    d.keywords.includes(q) || d.title.includes(q)
+  ).slice(0, 8);
 
   if (!matches.length) {
     searchResults.innerHTML = '<div class="search-no-result">검색 결과가 없습니다. 다른 키워드를 입력해보세요.</div>';
