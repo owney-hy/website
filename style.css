@@ -272,6 +272,8 @@ header {
   transition: all 0.2s;
   display: flex;
   align-items: center;
+  justify-content: center;
+  flex: 1 1 0;
   gap: 8px;
   position: relative;
   z-index: 3;
