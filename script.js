@@ -100,7 +100,7 @@ const CONTENT = {
     icon: '🔑',
     title: '영업 개시',
     subtitle: '판매사원 로그인 방법',
-    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
+    videoUrl: 'https://youtu.be/LzrCEuB1Gc0',
     steps: [
       { text: '<strong>영업개시</strong>를 클릭합니다(단축키 F1).', image: 'pos-login-step1.png' },
       { text: '<strong>사원번호</strong>와 <strong>비밀번호</strong>를 입력하고 <strong>등록</strong>합니다.', image: 'pos-login-step2.png' },
@@ -112,7 +112,7 @@ const CONTENT = {
     icon: '⚙️',
     title: 'PRESET 등록',
     subtitle: 'POS에서 자주 쓰는 상품을 빠르게 등록하는 방법',
-    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
+    videoUrl: 'https://youtu.be/_dYUwspKTuo',
     steps: [
       { text: '<strong>Preset</strong>을 클릭합니다.', image: 'pos-preset-step1.png' },
       { text: '<strong>프리셋 확장</strong>을 클릭합니다.', image: 'pos-preset-step2.png' },
@@ -130,7 +130,7 @@ const CONTENT = {
     icon: '💵',
     title: '현금 결제',
     subtitle: '현금 결제 및 현금영수증 처리 방법',
-    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
+    videoUrl: 'https://youtu.be/i6Vg24V_62I',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pos-cash-step1.png' },
       { text: '상품의 금액을 입력하고 <strong>등록</strong>을 클릭합니다.', image: 'pos-cash-step2.png' },
@@ -145,7 +145,7 @@ const CONTENT = {
     icon: '💳',
     title: '카드 결제',
     subtitle: '카드 삽입·센싱 결제 방법',
-    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
+    videoUrl: 'https://youtu.be/lmxwjLcLTec',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pos-card-step1.png' },
       { text: '상품의 금액을 입력하고 <strong>등록</strong>을 클릭합니다.', image: 'pos-card-step2.png' },
