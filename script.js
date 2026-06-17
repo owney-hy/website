@@ -162,7 +162,7 @@ const CONTENT = {
     icon: '📲',
     title: 'L.PAY 결제',
     subtitle: 'L.PAY 바코드 스캔 결제 방법',
-    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqndhttps://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
+    videoUrl: 'https://youtu.be/yoL0h2PrffI',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pos-lpay-step1.png' },
       { text: '상품의 금액을 입력하고 <strong>등록</strong>을 클릭합니다.', image: 'pos-lpay-step2.png' },
@@ -180,7 +180,7 @@ const CONTENT = {
     icon: '🎁',
     title: '상품권 결제',
     subtitle: '상품권 결제 및 거스름 처리 방법',
-    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
+    videoUrl: 'https://youtu.be/e6-F_CMlcrU',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pos-giftcard-step1.png' },
       { text: '상품의 금액을 입력하고 <strong>등록</strong>을 클릭합니다.', image: 'pos-giftcard-step2.png' },
@@ -197,7 +197,7 @@ const CONTENT = {
     icon: '📱',
     title: '모바일상품권 결제',
     subtitle: '모바일 상품권 결제 방법',
-    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
+    videoUrl: 'https://youtu.be/IJcfL0NCx58',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pos-mobile-giftcard-step1.png' },
       { text: '상품의 금액을 입력하고 <strong>등록</strong>을 클릭합니다.', image: 'pos-mobile-giftcard-step2.png' },
@@ -212,7 +212,7 @@ const CONTENT = {
     icon: '⭐',
     title: 'L.POINT 결제',
     subtitle: 'L.POINT 포인트 결제 방법',
-    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
+    videoUrl: 'https://youtu.be/lf9hDYTFA10',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pos-lpoint-step1.png' },
       { text: '상품의 금액을 입력하고 <strong>등록</strong>을 클릭합니다.', image: 'pos-lpoint-step2.png' },
@@ -230,7 +230,7 @@ const CONTENT = {
     icon: '🔄',
     title: '반품',
     subtitle: '반품 처리 방법',
-    videoUrl: 'https://youtu.be/1NnP1qN-zI0?si=jGvtZReuJ_geWqnd',
+    videoUrl: 'https://youtu.be/28HYmAofN2s',
     steps: [
       { text: '<strong>반품</strong>을 클릭합니다.', image: 'pos-refund-step1.png' },
       { text: '<strong>취소 사유</strong>를 선택합니다.', image: 'pos-refund-step2.png' },
