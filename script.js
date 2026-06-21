@@ -435,18 +435,32 @@ const SEARCH_DATA = Object.entries(CONTENT).map(([id, d]) => {
 /** 현재 열린 패널 ID 추적 */
 let currentOpenId = null;
 
-function getTabFromHash() {
-  const tab = window.location.hash.replace('#', '');
+function normalizeTabValue(tab) {
   if (tab === 'pda' || tab === 'tab-pda') return 'pda';
   if (tab === 'pos' || tab === 'tab-pos') return 'pos';
   return null;
+}
+
+function getTabFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const queryTab = normalizeTabValue(params.get('tab'));
+  if (queryTab) return queryTab;
+
+  return normalizeTabValue(window.location.hash.replace('#', ''));
+}
+
+function getTabUrl(tab) {
+  const url = new URL(window.location.href);
+  url.searchParams.set('tab', tab);
+  url.hash = '';
+  return url.pathname + url.search + url.hash;
 }
 
 /**
  * @param {'pos'|'pda'} tab - 전환할 탭 ID
  * @param {HTMLElement}  btn - 클릭된 탭 버튼 요소
  */
-function switchTab(tab, btn, updateHash = true) {
+function switchTab(tab, btn, updateUrl = true) {
   const targetPanel = document.getElementById('tab-' + tab);
   const targetBtn = btn || document.querySelector(`.tab-btn[data-tab="${tab}"]`);
   const targetState = document.getElementById('tab-state-' + tab);
@@ -465,9 +479,9 @@ function switchTab(tab, btn, updateHash = true) {
   targetBtn.classList.add('active');
   targetBtn.setAttribute('aria-selected', 'true');
 
-  const targetHash = '#tab-' + tab;
-  if (updateHash && window.location.hash !== targetHash) {
-    history.pushState(null, '', targetHash);
+  const targetUrl = getTabUrl(tab);
+  if (updateUrl && window.location.pathname + window.location.search + window.location.hash !== targetUrl) {
+    history.pushState(null, '', targetUrl);
   }
 
   // 열려 있던 상세 패널 초기화
@@ -494,20 +508,26 @@ document.addEventListener('keydown', event => {
   switchTab(tabBtn.dataset.tab, tabBtn);
 });
 
-function syncTabFromHash() {
-  const tab = getTabFromHash();
+function syncTabFromUrl() {
+  const tab = getTabFromUrl();
   if (tab) switchTab(tab, undefined, false);
 }
 
-window.addEventListener('hashchange', syncTabFromHash);
-window.addEventListener('popstate', syncTabFromHash);
+window.addEventListener('hashchange', syncTabFromUrl);
+window.addEventListener('popstate', syncTabFromUrl);
 
 if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
 }
 
-const initialTab = getTabFromHash();
-if (initialTab) switchTab(initialTab, undefined, false);
+const initialTab = getTabFromUrl();
+if (initialTab) {
+  switchTab(initialTab, undefined, false);
+
+  if (window.location.hash) {
+    history.replaceState(null, '', getTabUrl(initialTab));
+  }
+}
 
 requestAnimationFrame(() => window.scrollTo(0, 0));
 
