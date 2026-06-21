@@ -22,7 +22,7 @@
      error    : { title, cases[] } — 즉시 연락 박스 (선택)
      videoUrl : YouTube 영상 URL (선택)
 ────────────────────────────────────────────────────────── */
-const MANUAL_ASSET_DIR = 'pos pda manual/';
+const MANUAL_ASSET_DIR = 'pos_pda_guide/';
 const VIDEO_MANUAL_URL = '';
 const YOUTUBE_EMBED_ORIGIN = 'https://www.youtube-nocookie.com';
 
@@ -99,7 +99,7 @@ const CONTENT = {
     tab: 'pos',
     icon: '🔑',
     title: '영업 개시',
-    subtitle: '판매사원 로그인 방법',
+    subtitle: '가장 먼저 로그인을 해야 해요.',
     videoUrl: 'https://youtu.be/LzrCEuB1Gc0',
     steps: [
       { text: '<strong>영업개시</strong>를 클릭합니다(단축키 F1).', image: 'pos-login-step1.png' },
@@ -111,7 +111,7 @@ const CONTENT = {
     tab: 'pos',
     icon: '⚙️',
     title: 'PRESET 등록',
-    subtitle: 'POS에서 자주 쓰는 상품을 빠르게 등록하는 방법',
+    subtitle: '판매할 상품을 프리셋에 등록해요.',
     videoUrl: 'https://youtu.be/_dYUwspKTuo',
     steps: [
       { text: '<strong>Preset</strong>을 클릭합니다.', image: 'pos-preset-step1.png' },
@@ -129,7 +129,7 @@ const CONTENT = {
     tab: 'pos',
     icon: '💵',
     title: '현금 결제',
-    subtitle: '현금 결제 및 현금영수증 처리 방법',
+    subtitle: '현금으로 결제하는 방법이에요.',
     videoUrl: 'https://youtu.be/i6Vg24V_62I',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pos-cash-step1.png' },
@@ -144,7 +144,7 @@ const CONTENT = {
     tab: 'pos',
     icon: '💳',
     title: '카드 결제',
-    subtitle: '카드 삽입·센싱 결제 방법',
+    subtitle: '카드로 결제하는 방법이에요',
     videoUrl: 'https://youtu.be/lmxwjLcLTec',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pos-card-step1.png' },
@@ -161,7 +161,7 @@ const CONTENT = {
     tab: 'pos',
     icon: '📲',
     title: 'L.PAY 결제',
-    subtitle: 'L.PAY 바코드 스캔 결제 방법',
+    subtitle: '엘페이로 결제하는 방법이에요.',
     videoUrl: 'https://youtu.be/yoL0h2PrffI',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pos-lpay-step1.png' },
@@ -178,8 +178,8 @@ const CONTENT = {
   'pos-giftcard': {
     tab: 'pos',
     icon: '🎁',
-    title: '상품권 결제',
-    subtitle: '상품권 결제 및 거스름 처리 방법',
+    title: '지류 상품권 결제',
+    subtitle: '지류 상품권 결제 방법이에요.',
     videoUrl: 'https://youtu.be/e6-F_CMlcrU',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pos-giftcard-step1.png' },
@@ -195,8 +195,8 @@ const CONTENT = {
   'pos-mobile-giftcard': {
     tab: 'pos',
     icon: '📱',
-    title: '모바일상품권 결제',
-    subtitle: '모바일 상품권 결제 방법',
+    title: '모바일 상품권 결제',
+    subtitle: '모바일 상품권 결제 방법이에요.',
     videoUrl: 'https://youtu.be/IJcfL0NCx58',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pos-mobile-giftcard-step1.png' },
@@ -211,7 +211,7 @@ const CONTENT = {
     tab: 'pos',
     icon: '⭐',
     title: 'L.POINT 결제',
-    subtitle: 'L.POINT 포인트 결제 방법',
+    subtitle: '엘포인트로 결제하는 방법이에요.',
     videoUrl: 'https://youtu.be/lf9hDYTFA10',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pos-lpoint-step1.png' },
@@ -229,7 +229,7 @@ const CONTENT = {
     tab: 'pos',
     icon: '🔄',
     title: '반품',
-    subtitle: '반품 처리 방법',
+    subtitle: '반품 처리하는 방법이에요.',
     videoUrl: 'https://youtu.be/28HYmAofN2s',
     steps: [
       { text: '<strong>반품</strong>을 클릭합니다.', image: 'pos-refund-step1.png' },
@@ -247,7 +247,7 @@ const CONTENT = {
     tab: 'pda',
     icon: '🔑',
     title: '영업 개시',
-    subtitle: '판매사원 로그인 방법',
+    subtitle: '가장 먼저 로그인을 해야 해요.',
     videoUrl: 'https://youtu.be/wz7WJtk-Ljc?si=38BfEASuISxHFTHE',
     steps: [
       { text: '<strong>판매사원 로그인</strong>을 클릭합니다.', image: 'pda-login-step1.png' },
@@ -259,7 +259,7 @@ const CONTENT = {
     tab: 'pda',
     icon: '⚙️',
     title: 'PRESET 등록',
-    subtitle: 'PDA에서 자주 쓰는 상품을 빠르게 등록하는 방법',
+    subtitle: '판매할 상품을 프리셋에 등록해요.',
     videoUrl: 'https://youtu.be/JRXb8fIPY4M?si=JgEXWFzpyIm7PGlo',
     steps: [
       { text: '<strong>PRESET 확장</strong> 버튼을 클릭합니다.', image: 'pda-preset-step1.png' },
@@ -274,7 +274,7 @@ const CONTENT = {
     tab: 'pda',
     icon: '💵',
     title: '현금 결제',
-    subtitle: '현금 결제 및 현금영수증 처리 방법',
+    subtitle: '현금으로 결제하는 방법이에요.',
     videoUrl: 'https://youtu.be/o3ZvbeeB_C8?si=uqP7DEAiTJhzsx3d',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pda-cash-step1.png' },
@@ -292,7 +292,7 @@ const CONTENT = {
     tab: 'pda',
     icon: '💳',
     title: '카드 결제',
-    subtitle: '카드 삽입·센싱 결제 방법',
+    subtitle: '카드로 결제하는 방법이에요.',
     videoUrl: 'https://youtu.be/8trMxxT__vs?si=ccgdXFFy4UWLWvKC',
     steps: [
       { text: '<strong>등록할 상품</strong>을 클릭합니다.', image: 'pda-card-step1.png' },
@@ -311,7 +311,7 @@ const CONTENT = {
     tab: 'pda',
     icon: '📲',
     title: 'L.PAY 결제',
-    subtitle: 'L.PAY 바코드 스캔 결제 방법',
+    subtitle: '엘페이로 결제하는 방법이에요.',
     videoUrl: 'https://youtu.be/ZSs3h4c6n9c?si=ks1ZKbGlKsJqUSEI',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pda-lpay-step1.png' },
@@ -326,8 +326,8 @@ const CONTENT = {
   'pda-giftcard': {
     tab: 'pda',
     icon: '🎁',
-    title: '상품권 결제',
-    subtitle: '지류 상품권 결제 및 거스름 처리 방법',
+    title: '지류 상품권 결제',
+    subtitle: '지류 상품권 결제 방법이에요.',
     videoUrl: 'https://youtu.be/TOwVuTjA_bI?si=QoIlwJ7M4kl7tH8k',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pda-giftcard-step1.png' },
@@ -346,8 +346,8 @@ const CONTENT = {
   'pda-mobile-giftcard': {
     tab: 'pda',
     icon: '📱',
-    title: '모바일상품권 결제',
-    subtitle: '모바일 상품권 스캔 결제 방법',
+    title: '모바일 상품권 결제',
+    subtitle: '모바일 상품권 결제 방법이에요.',
     videoUrl: 'https://youtu.be/opRzWw3pyJs?si=_CIJbqoSyI8ms_bc',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pda-mobile-giftcard-step1.png' },
@@ -364,7 +364,7 @@ const CONTENT = {
     tab: 'pda',
     icon: '⭐',
     title: 'L.POINT 결제',
-    subtitle: 'L.POINT 포인트 결제 방법',
+    subtitle: '엘포인트로 결제하는 방법이에요.',
     videoUrl: 'https://youtu.be/ziocjVaFySU?si=IrNCuy9peaMjbvyh',
     steps: [
       { text: '<strong>등록할 상품</strong>을 클릭합니다.', image: 'pda-lpoint-step1.png' },
@@ -382,7 +382,7 @@ const CONTENT = {
     tab: 'pda',
     icon: '🔄',
     title: '반품',
-    subtitle: '영수증 조회 후 반품 처리 방법',
+    subtitle: '반품 처리하는 방법이에요.',
     videoUrl: 'https://youtu.be/TxGKMT99dlA?si=GAqEQFnOIChidsI7',
     steps: [
       { text: '<strong>반품등록</strong>을 클릭합니다.', image: 'pda-refund-step1.png' },

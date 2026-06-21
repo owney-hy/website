@@ -812,7 +812,7 @@ header {
   background: var(--surface);
   border-radius: 24px;
   padding: 36px;
-  max-width: 400px;
+  max-width: 480px;
   width: 100%;
   text-align: center;
   animation: popIn 0.25s ease;
@@ -839,7 +839,7 @@ header {
 .qr-img-wrap {
   background: var(--bg);
   border-radius: var(--radius);
-  padding: 24px;
+  padding: 22px;
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
@@ -850,7 +850,7 @@ header {
 .qr-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 14px;
   width: 100%;
 }
 
@@ -862,9 +862,9 @@ header {
 }
 
 .qr-item-label {
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .qr-pos { color: var(--primary); }
@@ -961,6 +961,28 @@ header {
   }
 
   .detail-panel { padding: 20px; }
+
+  .modal {
+    padding: 22px;
+  }
+
+  .qr-img-wrap {
+    padding: 14px;
+  }
+
+  .qr-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .qr-item {
+    padding: 10px;
+  }
+
+  .qr-item-label {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
 
   .scroll-top-btn {
     right: 16px;
