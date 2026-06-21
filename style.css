@@ -904,6 +904,40 @@ header {
   background: var(--border);
 }
 
+.scroll-top-btn {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 450;
+  width: 72px;
+  height: 72px;
+  border: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #24A9E2 0%, #62E7C0 52%, #31CF78 100%);
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.22);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, filter 0.2s, box-shadow 0.2s;
+}
+
+.scroll-top-btn:hover {
+  filter: brightness(1.03) saturate(1.06);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(17, 24, 39, 0.26);
+}
+
+.scroll-top-btn:active {
+  transform: translateY(0);
+}
+
+.scroll-top-btn:focus-visible {
+  outline: 3px solid rgba(36, 169, 226, 0.35);
+  outline-offset: 4px;
+}
+
 
 /* ──────────────────────────────────────────
    13. 반응형 (모바일 ≤ 600px)
@@ -927,4 +961,11 @@ header {
   }
 
   .detail-panel { padding: 20px; }
+
+  .scroll-top-btn {
+    right: 16px;
+    bottom: 16px;
+    width: 60px;
+    height: 60px;
+  }
 }

@@ -739,3 +739,11 @@ function openQRModal() {
 function closeQRModal() {
   document.getElementById('qrModal').classList.remove('show');
 }
+
+const scrollTopBtn = document.querySelector('.scroll-top-btn');
+
+if (scrollTopBtn) {
+  scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  });
+}
