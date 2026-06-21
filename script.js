@@ -144,7 +144,7 @@ const CONTENT = {
     tab: 'pos',
     icon: '💳',
     title: '카드 결제',
-    subtitle: '카드로 결제하는 방법이에요',
+    subtitle: '카드로 결제하는 방법이에요.',
     videoUrl: 'https://youtu.be/lmxwjLcLTec',
     steps: [
       { text: '등록할 상품을 클릭합니다.', image: 'pos-card-step1.png' },
