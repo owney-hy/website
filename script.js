@@ -6,7 +6,6 @@
      3. 탭 전환 (switchTab)
      4. 상세 패널 열기/닫기 (openDetail / closeDetail)
      5. 검색 기능 (searchInput 이벤트)
-     6. QR 모달 (openQRModal / closeQRModal)
    ============================================================ */
 
 
@@ -744,21 +743,6 @@ document.addEventListener('click', (e) => {
     searchResults.classList.remove('show');
   }
 });
-
-
-/* ──────────────────────────────────────────────────────────
-   6. QR 모달
-────────────────────────────────────────────────────────── */
-
-/** QR 모달 열기 */
-function openQRModal() {
-  document.getElementById('qrModal').classList.add('show');
-}
-
-/** QR 모달 닫기 */
-function closeQRModal() {
-  document.getElementById('qrModal').classList.remove('show');
-}
 
 const scrollTopBtn = document.querySelector('.scroll-top-btn');
 

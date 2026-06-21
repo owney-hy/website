@@ -11,7 +11,7 @@
 <body>
 
   <!-- ───────────────────────────────────────
-       헤더 : 로고 / 검색창 / QR버튼
+       헤더 : 로고 / 검색창
   ─────────────────────────────────────────── -->
   <header>
     <div class="header-inner">
@@ -34,17 +34,6 @@
         >
         <div class="search-results" id="searchResults"></div>
       </div>
-
-      <!-- QR코드 버튼 -->
-      <button class="qr-btn" onclick="openQRModal()">
-        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-          <rect x="3" y="3" width="7" height="7"/>
-          <rect x="14" y="3" width="7" height="7"/>
-          <rect x="3" y="14" width="7" height="7"/>
-          <path d="M14 14h3v3h-3zM17 17h3v3h-3zM14 17h.01M17 14h.01"/>
-        </svg>
-        QR코드
-      </button>
 
     </div>
   </header>
@@ -311,36 +300,6 @@
       <path d="M6 15l6-6 6 6"/>
     </svg>
   </button>
-
-
-  <!-- ───────────────────────────────────────
-       QR 모달
-  ─────────────────────────────────────────── -->
-  <div class="modal-overlay" id="qrModal" onclick="if(event.target===this) closeQRModal()">
-    <div class="modal">
-      <h3>📲 QR코드로 바로 접속</h3>
-      <p>결제 단말기 주변에 부착하면<br>직원들이 바로 스캔할 수 있어요.</p>
-      <div class="qr-img-wrap">
-        <div class="qr-grid">
-          <div class="qr-item">
-            <div class="qr-item-label qr-pda">📱 PDA</div>
-            <div class="qr-placeholder">
-              <img src="qr-pda.png" style="width:100%;border-radius:4px" alt="PDA 매뉴얼 QR코드">
-            </div>
-          </div>
-          <div class="qr-item">
-            <div class="qr-item-label qr-pos">🖥️ POS</div>
-            <div class="qr-placeholder">
-              <img src="qr-pos.png" style="width:100%;border-radius:4px" alt="POS 매뉴얼 QR코드">
-            </div>
-          </div>
-        </div>
-      </div>
-      <button class="modal-close" onclick="closeQRModal()">닫기</button>
-    </div>
-  </div>
-
-
   <!-- JS는 body 맨 아래에 로드 (DOM 완성 후 실행) -->
   <script src="script.js?v=20260621-tab-query"></script>
 </body>

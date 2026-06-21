@@ -79,9 +79,9 @@ header {
   margin: 0 auto;
   padding: 0 24px;
   height: 60px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr minmax(260px, 520px) 1fr;
   align-items: center;
-  justify-content: space-between;
   gap: 16px;
 }
 
@@ -102,9 +102,10 @@ header {
 
 /* 검색창 */
 .search-wrap {
-  flex: 1;
-  max-width: 400px;
+  width: 100%;
   position: relative;
+  grid-column: 2;
+  justify-self: center;
 }
 
 .search-wrap input {
@@ -192,30 +193,6 @@ header {
   color: var(--text-muted);
   font-size: 14px;
 }
-
-/* QR 버튼 */
-.qr-btn {
-  background: linear-gradient(135deg, #22A9E8 0%, #57E5BD 55%, #2FD077 100%);
-  color: #111827;
-  border: none;
-  border-radius: 100px;
-  padding: 9px 18px;
-  font-size: 13px;
-  font-weight: 600;
-  font-family: inherit;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: filter 0.2s, transform 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.qr-btn:hover {
-  filter: brightness(0.96) saturate(1.08);
-  transform: translateY(-1px);
-}
-
 
 /* ──────────────────────────────────────────
    4. 히어로 + 탭 바
@@ -789,121 +766,6 @@ header {
   flex-shrink: 0;
 }
 
-
-/* ──────────────────────────────────────────
-   10. QR 모달
-────────────────────────────────────────── */
-.modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 500;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-}
-
-.modal-overlay.show {
-  display: flex;
-}
-
-.modal {
-  background: var(--surface);
-  border-radius: 24px;
-  padding: 36px;
-  max-width: 480px;
-  width: 100%;
-  text-align: center;
-  animation: popIn 0.25s ease;
-}
-
-@keyframes popIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to   { opacity: 1; transform: scale(1); }
-}
-
-.modal h3 {
-  font-size: 20px;
-  font-weight: 800;
-  margin-bottom: 8px;
-}
-
-.modal p {
-  font-size: 14px;
-  color: var(--text-secondary);
-  margin-bottom: 24px;
-  line-height: 1.6;
-}
-
-.qr-img-wrap {
-  background: var(--bg);
-  border-radius: var(--radius);
-  padding: 22px;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-}
-
-.qr-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  width: 100%;
-}
-
-.qr-item {
-  background: var(--surface);
-  border-radius: var(--radius-sm);
-  padding: 16px;
-  border: 1.5px solid var(--border);
-}
-
-.qr-item-label {
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-.qr-pos { color: var(--primary); }
-.qr-pda { color: var(--pda-color); }
-
-.qr-placeholder {
-  width: 100%;
-  aspect-ratio: 1;
-  background: var(--bg);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 40px;
-}
-
-.qr-note {
-  font-size: 12px;
-  color: var(--text-muted);
-  text-align: center;
-  line-height: 1.5;
-}
-
-.modal-close {
-  background: var(--bg);
-  border: 1.5px solid var(--border);
-  border-radius: 100px;
-  padding: 10px 24px;
-  font-size: 14px;
-  font-weight: 600;
-  font-family: inherit;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.modal-close:hover {
-  background: var(--border);
-}
-
 .scroll-top-btn {
   position: fixed;
   right: 24px;
@@ -943,10 +805,15 @@ header {
    13. 반응형 (모바일 ≤ 600px)
 ────────────────────────────────────────── */
 @media (max-width: 600px) {
-  .header-inner { padding: 0 16px; }
+  .header-inner {
+    grid-template-columns: 1fr;
+    padding: 0 16px;
+  }
 
   /* 모바일에서 로고 텍스트 숨김 */
   .logo-text { display: none; }
+  .logo { display: none; }
+  .search-wrap { grid-column: 1; }
 
   .main-wrap  { padding: 0 16px 40px; }
   .hero       { padding: 32px 16px 0; }
@@ -961,28 +828,6 @@ header {
   }
 
   .detail-panel { padding: 20px; }
-
-  .modal {
-    padding: 22px;
-  }
-
-  .qr-img-wrap {
-    padding: 14px;
-  }
-
-  .qr-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-
-  .qr-item {
-    padding: 10px;
-  }
-
-  .qr-item-label {
-    font-size: 14px;
-    margin-bottom: 8px;
-  }
 
   .scroll-top-btn {
     right: 16px;
